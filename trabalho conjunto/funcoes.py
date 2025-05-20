@@ -12,7 +12,11 @@ def menu():
 def criar_conjunto(conjuntos):
     nome_conjunto = input('Digite o nome do conjunto que deseja criar: ')
     elementos = []
-    if nome_conjunto not in conjuntos:
+    verificacao = True
+    for conjs in conjuntos:
+        if nome_conjunto in conjs:
+            verificacao = False
+    if verificacao == True:
         opcao = 's'
         while opcao != 'n':
             elemento = int(input('Digite um elemento'))
@@ -22,7 +26,7 @@ def criar_conjunto(conjuntos):
             else:
                 print(f'Elemento "{elemento}" já está no conjunto!')
             opcao = input('Deseja adicionar mais elementos? [s/n] ').lower()
-        return conjuntos.append(nome_conjunto, elementos)
+        return conjuntos.append([nome_conjunto, elementos])
     else:
         print(f'O nome "{nome_conjunto}" já está em uso!')
 
