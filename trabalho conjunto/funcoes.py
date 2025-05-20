@@ -10,7 +10,7 @@ def menu():
     print('5. Apagar conjunto')
     print('6. União de conjuntos')
     print('7. Intersecção de conjuntos')
-    print('_'*46)
+    print('_'*50)
     print()
 def criar_conjunto(conjuntos):
     nome_conjunto = input('Digite o nome do conjunto que deseja criar: ')
