@@ -164,7 +164,7 @@ def uniao_conjuntos(conjuntos):
                                     uniao.append(elementos)
                     nome_conjunto = nome_segundo_conjunto
                 print(f'União entre os conjuntos "{nome_primeiro_conjunto}" e "{nome_segundo_conjunto}":')
-                print(uniao.sort())
+                return uniao.sort()
 
             else:
                 print(f'Conjunto "{nome_segundo_conjunto}" não escontrado')
@@ -190,4 +190,5 @@ while True:
     elif escolha == '5':
         apagar_conjunto(lista_conjuntos)
     elif escolha == '6':
-        uniao_conjuntos(lista_conjuntos)
+        resp = uniao_conjuntos(lista_conjuntos)
+        print(resp)
