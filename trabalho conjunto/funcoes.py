@@ -5,7 +5,7 @@ def menu():
     print('_'*23)
     print('1. Criar conjunto')
     print('2. Adicionar elemento (Em um conjunto ja existente!)')
-    print('3.Remover elemento de um conjunto')
+    print('3. Remover elemento de um conjunto')
     print('4. Mostrar conjuntos')
     print('5. Apagar conjunto')
     print('6. União de conjuntos')
@@ -41,7 +41,24 @@ def add_elemento_conjunto(conjuntos):
         print('Conjuntos existentes:')
         for conjunto in conjuntos:
             print(conjunto)
-        print('=-'*35)
+        nome_conjunto = input('Escolha o nome do conjunto no qual deseja adicionar elementos: ')
+        verificacao = False
+        for conjunto in conjuntos:
+            if nome_conjunto in conjunto[0]:
+                verificacao = True
+                elementos = []
+                opcao = 's'
+                while opcao != 'n':
+                    elemento = int(input('Digite um elemento: '))
+                    if elemento not in conjunto[1]:
+                        conjunto[1].append(elemento)
+                        print(f'Elemento "{elemento}" adicionado com sucesso!')
+                    else:
+                        print(f'Elemento "{elemento}" já está no conjunto!')
+                    opcao = input('Deseja adicionar mais elementos? [s/n] ').lower()
+        if verificacao == False:
+            print(f'O nome "{nome_conjunto}" não existe')
+    print('=-'*25)
 
 while True:
     menu()
