@@ -17,8 +17,8 @@ def criar_conjunto(conjuntos):
     nome_conjunto = input('Digite o nome do conjunto que deseja criar: ')
     elementos = []
     verificacao = True
-    for conjs in conjuntos:
-        if nome_conjunto in conjs: # verifica se o nome escolhido já existe nas sublistas
+    for conjunto in conjuntos:
+        if nome_conjunto in conjunto: # verifica se o nome escolhido já existe nas sublistas
             verificacao = False 
             break
     if verificacao == True: # se o nome ainda não estiver em uso
@@ -89,7 +89,7 @@ def remover_elemento(conjuntos):
                         print(f'Conjunto {conjunto[0]} não contem mais elementos!')
                         break
                     print('=-'*25)
-                    opcao = input('Deseja remover mais elementos? [s/n] ').lower()
+                    opcao = input('Deseja remover outro elemento? [s/n] ').lower()
         if verificacao == False:
             print(f'O nome "{nome_conjunto}" não existe')
     print('=-'*25)
@@ -99,6 +99,7 @@ def mostrar_conjunto(conjuntos):
     if conjuntos == []:
         print('Lista de conjunto está vazia!')
     else:
+        print('Conjuntos existentes:')
         for conjunto in conjuntos:
             print(f'Conjunto: {conjunto[0]}')
             if conjunto[1] != []:
@@ -113,6 +114,7 @@ def apagar_conjunto(conjuntos):
     if conjuntos == []:
         print('Lista de conjunto está vazia!')
     else:
+        print('Conjuntos existentes:')
         opcao = 's'
         while opcao != 'n':
             for conjunto in conjuntos:
@@ -127,11 +129,53 @@ def apagar_conjunto(conjuntos):
                     verificacao = True
             if verificacao == False:
                 print(f'Conjunto "{nome_conjunto}" não existe!')
-
-            opcao = input('Deseja apagar mais conjuntos? [s/n] ').lower()
-
+            if conjuntos != []:
+                opcao = input('Deseja apagar outro conjunto? [s/n] ').lower()
+            else:
+                break
     print('=-'*25)
 
+def uniao_conjuntos(conjuntos):
+    if conjuntos == []:
+        print('Lista de conjunto está vazia!')
+    elif len(conjuntos) <= 1:
+        print('A lista de conjuntos tem que conter pelo menos 2 conjuntos!')   
+    else:
+        print('Conjuntos existentes:')
+        nomes_conjuntos = []
+        for conjunto in conjuntos:
+            print(conjunto)
+            nomes_conjuntos.append(conjunto[0])
+        print('Digite dois de conjuntos para ver a união deles')
+        nome_primeiro_conjunto = input('Nome do primeiro conjunto: ')
+        if nome_primeiro_conjunto in nomes_conjuntos:
+            nome_segundo_conjunto = input('Nome do segundo conjunto: ')
+            if nome_segundo_conjunto in nomes_conjuntos:
+                uniao = []
+                nome_conjunto = nome_primeiro_conjunto
+                for i in range(0, len(conjuntos)):
+                    for conjunto in conjuntos:
+                        if nome_conjunto == conjunto[0] and nome_conjunto == nome_primeiro_conjunto:
+                            for elementos in conjunto[1]:
+                                uniao.append(elementos)
+                        if i == 1 and nome_conjunto == conjunto[0]:
+                            for elementos in conjunto[1]:
+                                if elementos not in uniao:
+                                    uniao.append(elementos)
+                    nome_conjunto = nome_segundo_conjunto
+                print(f'União entre os conjuntos "{nome_primeiro_conjunto}" e "{nome_segundo_conjunto}":')
+                print(uniao.sort())
+
+            else:
+                print(f'Conjunto "{nome_segundo_conjunto}" não escontrado')
+        else:
+            print(f'Conjunto "{nome_primeiro_conjunto}" não escontrado')
+                    
+
+        
+
+        
+       
 while True:
     menu()
     escolha = input('Escolha uma opção: ')
@@ -145,3 +189,5 @@ while True:
         mostrar_conjunto(lista_conjuntos)
     elif escolha == '5':
         apagar_conjunto(lista_conjuntos)
+    elif escolha == '6':
+        uniao_conjuntos(lista_conjuntos)
