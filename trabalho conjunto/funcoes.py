@@ -94,6 +94,19 @@ def remover_elemento(conjuntos):
             print(f'O nome "{nome_conjunto}" não existe')
     print('=-'*25)
 
+def mostrar_conjunto(conjuntos):
+    print('=-'*25)
+    if conjuntos == []:
+        print('Lista de conjunto está vazia!')
+    else:
+        for conjunto in conjuntos:
+            print(conjunto)
+            print()
+
+
+
+
+
 while True:
     menu()
     escolha = input('Escolha uma opção: ')
@@ -103,3 +116,6 @@ while True:
         add_elemento_conjunto(lista_conjuntos)
     elif escolha == '3':
         remover_elemento(lista_conjuntos)
+    elif escolha == '4':
+        mostrar_conjunto(lista_conjuntos)
+    
