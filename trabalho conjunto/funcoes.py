@@ -101,7 +101,10 @@ def mostrar_conjunto(conjuntos):
     else:
         for conjunto in conjuntos:
             print(f'Conjunto: {conjunto[0]}')
-            print(f'Elementos: {conjunto[1]}')
+            if conjunto[1] != []:
+                print(f'Elementos: {conjunto[1]}')
+            else:
+                print(f'Conjunto "{conjunto[0]}" não tem elementos adicionados!')
             print()
     print('=-'*25)
 
@@ -110,17 +113,23 @@ def apagar_conjunto(conjuntos):
     if conjuntos == []:
         print('Lista de conjunto está vazia!')
     else:
-        for conjunto in conjuntos:
-            print(conjunto)
-        nome_conjunto = input('Digite o nome do conjunto no qual você deseja remover: ')
-        verificacao = False
-        for conjunto in conjuntos:
-            if nome_conjunto in conjunto:
-                conjuntos.remove(conjunto)
-                print(f'Conjunto {nome_conjunto} removido com sucesso!')
-                verificacao = True
-        if verificacao == False:
-            print(f'Conjunto {nome_conjunto} não existe!')
+        opcao = 's'
+        while opcao != 'n':
+            for conjunto in conjuntos:
+                print(conjunto)
+            nome_conjunto = input('Digite o nome do conjunto no qual você deseja remover: ')
+            verificacao = False
+            print()
+            for conjunto in conjuntos:
+                if nome_conjunto in conjunto:
+                    conjuntos.remove(conjunto)
+                    print(f'Conjunto "{nome_conjunto}" removido com sucesso!')
+                    verificacao = True
+            if verificacao == False:
+                print(f'Conjunto "{nome_conjunto}" não existe!')
+
+            opcao = input('Deseja apagar mais conjuntos? [s/n] ').lower()
+
     print('=-'*25)
 
 while True:
@@ -136,4 +145,3 @@ while True:
         mostrar_conjunto(lista_conjuntos)
     elif escolha == '5':
         apagar_conjunto(lista_conjuntos)
-    
