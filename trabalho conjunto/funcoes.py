@@ -150,22 +150,33 @@ def uniao_conjuntos(conjuntos):
         nome_primeiro_conjunto = input('Nome do primeiro conjunto: ')
         if nome_primeiro_conjunto in nomes_conjuntos:
             nome_segundo_conjunto = input('Nome do segundo conjunto: ')
-            if nome_segundo_conjunto in nomes_conjuntos:
+            if nome_segundo_conjunto == nome_primeiro_conjunto:
+                print('Não pode repetir o nome do conjunto escolhido anteriormente!')
+            elif nome_segundo_conjunto in nomes_conjuntos:
                 uniao = []
+                todos_conjuntos = []
                 nome_conjunto = nome_primeiro_conjunto
                 for i in range(0, len(conjuntos)):
                     for conjunto in conjuntos:
                         if nome_conjunto == conjunto[0] and nome_conjunto == nome_primeiro_conjunto:
+                            todos_conjuntos.append(conjunto[1])
                             for elementos in conjunto[1]:
                                 uniao.append(elementos)
+
                         if i == 1 and nome_conjunto == conjunto[0]:
+                            todos_conjuntos.append(conjunto[1])
                             for elementos in conjunto[1]:
                                 if elementos not in uniao:
                                     uniao.append(elementos)
                     nome_conjunto = nome_segundo_conjunto
-                print(f'União entre os conjuntos "{nome_primeiro_conjunto}" e "{nome_segundo_conjunto}":')
-                return uniao.sort()
-
+                
+                cont = 0
+                for nome_conj in nomes_conjuntos:
+                    print(f'Conjunto "{nome_conj}": {todos_conjuntos[cont]}')
+                    cont += 1
+                print(f'União:',end=' ')
+                uniao.sort()
+                print(uniao)
             else:
                 print(f'Conjunto "{nome_segundo_conjunto}" não escontrado')
         else:
@@ -190,5 +201,4 @@ while True:
     elif escolha == '5':
         apagar_conjunto(lista_conjuntos)
     elif escolha == '6':
-        resp = uniao_conjuntos(lista_conjuntos)
-        print(resp)
+        uniao_conjuntos(lista_conjuntos)
