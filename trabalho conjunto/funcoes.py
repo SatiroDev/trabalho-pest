@@ -1,3 +1,4 @@
+from time import sleep
 lista_conjuntos = []
 
 def menu():
@@ -10,6 +11,7 @@ def menu():
     print('5. Apagar conjunto')
     print('6. União de conjuntos')
     print('7. Intersecção de conjuntos')
+    print('8. Sair do programa')
     print('_'*50)
     print()
 
@@ -214,7 +216,6 @@ def interseccao_conjuntos(conjuntos):
                                 if elementos in todos_conjuntos[0]:
                                     interseccao.append(elementos) # adiciona elementos a lista 'interseccao' 
                     nome_conjunto = nome_segundo_conjunto
-                    
                 cont = 0
                 for nome_conj in nomes_conjuntos:
                     print()
@@ -247,7 +248,12 @@ while True:
     elif escolha == '7':
         interseccao_conjuntos(lista_conjuntos)
     elif escolha == '8':
-        print('Fim do programa, até mais!')
+        saindo = 'Saindo.'
+        for i in range(3):
+            print(saindo)
+            saindo = saindo + '.'
+            sleep(1)
+        print('FIM!')
         break
     else:
         print('Opção inválida!')
