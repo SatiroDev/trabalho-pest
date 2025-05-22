@@ -208,13 +208,11 @@ def interseccao_conjuntos(conjuntos):
                     for conjunto in conjuntos:
                         if nome_conjunto == conjunto[0] and nome_conjunto == nome_primeiro_conjunto: # verifica se o nome que usuário digitou está na lista e se é igual ao primeiro nome 
                             todos_conjuntos.append(conjunto[1]) # adiciona todos os elementos de um conjunto 
-                            for elementos in conjunto[1]:
-                                interseccao.append(elementos) # adiciona elementos a lista 'interseccao' 
                         if i == 1 and nome_conjunto == conjunto[0]:
                             todos_conjuntos.append(conjunto[1])
                             for elementos in conjunto[1]:
                                 if elementos in todos_conjuntos[0]:
-                                    interseccao.append(elementos)
+                                    interseccao.append(elementos) # adiciona elementos a lista 'interseccao' 
                     nome_conjunto = nome_segundo_conjunto
                     
                 cont = 0
@@ -223,7 +221,7 @@ def interseccao_conjuntos(conjuntos):
                     print(f'Conjunto "{nome_conj}": {todos_conjuntos[cont]}')
                     cont += 1
                 print()
-                print(f'União:',end=' ')
+                print(f'Intersecção:',end=' ')
                 interseccao.sort()
                 print(interseccao)
             else:
@@ -246,3 +244,10 @@ while True:
         apagar_conjunto(lista_conjuntos)
     elif escolha == '6':
         uniao_conjuntos(lista_conjuntos)
+    elif escolha == '7':
+        interseccao_conjuntos(lista_conjuntos)
+    elif escolha == '8':
+        print('Fim do programa, até mais!')
+        break
+    else:
+        print('Opção inválida!')
