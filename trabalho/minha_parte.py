@@ -132,8 +132,8 @@ def apagar_conjunto():
                 boleano = True
                 lista_conjuntos.remove(conjunto)
                 print(f'Conjunto "{nome_conjunto}" removido com sucesso!')
-    if boleano == False: # se o nome do conjunto escolhido pelo usuário não for achado dentro da lista principal
-        print('Conjunto não encontrado!')
+        if boleano == False: # se o nome do conjunto escolhido pelo usuário não for achado dentro da lista principal
+            print(f'Conjunto "{nome_conjunto}" não encontrado!')
     print()
     print('-=' * 25) 
 
