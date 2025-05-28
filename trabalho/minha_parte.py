@@ -21,17 +21,17 @@ def criar_conjunto(): # Nesse def iremos dar o nome do conjunto e criar um conju
     conjunto_elementos = []
     nome_conjunto = input('Qual o nome do conjunto? ')
     boleano = False
-    for conjunto in lista_conjuntos:
-        if nome_conjunto == conjunto[0]:
+    for conjunto in lista_conjuntos: # loop que vai verificar se o nome do conjunto escolhido pelo usuário já foi adicionado antes
+        if nome_conjunto == conjunto[0]: # se o nome do conjunto for igual a algum nome de conjunto já adicionado
             boleano = True
             break
-    if boleano == True:
+    if boleano == True: # se o nome já estiver sido adicionado
         print(f'Conjunto com o nome "{nome_conjunto}" já existe')
-    else:
+    else: # se o nome do conjunto não estiver sido adicionado
         conjunto_elementos.append(nome_conjunto)
         print(f'Conjunto "{nome_conjunto}" adicionado com sucesso!')
         print()
-        escolha = 0
+        escolha = 's'
         while escolha != 'n':
                 elemento = int(input('Qual elemento você deseja adicionar: '))
                 if elemento not in elementos: # se o elemento não estiver sido adicionado antes 
@@ -46,11 +46,11 @@ def criar_conjunto(): # Nesse def iremos dar o nome do conjunto e criar um conju
 def add_elemento_conjunto(): # Nesse def iremos adicionar elementos a um conjunto existente
     if len(lista_conjuntos) == 0: # se a lista principal estiver vazia, ou seja, sem nenhum conjunto adicionado
         print('A lista de conjuntos está vazia. Adicione um conjunto primeiro!')
-    else: # se a lista não estiver vazia
+    else: # se a lista principal não estiver vazia
         boleano = False
-        nome = input('Qual o nome do conjunto? ')
+        nome_conjunto = input('Qual o nome do conjunto? ')
         for conjunto in lista_conjuntos:
-            if nome == conjunto[0]: # verifica se o nome é igual a algum nome de conjunto que está adicionado a lista principal
+            if nome_conjunto == conjunto[0]: # verifica se o nome é igual a algum nome de conjunto que está adicionado a lista principal
                 escolha = 's'
                 while escolha != 'n':
                     elemento = int(input('Qual o elemento deseja adicionar? ')) 
@@ -62,16 +62,16 @@ def add_elemento_conjunto(): # Nesse def iremos adicionar elementos a um conjunt
                     escolha = input('Deseja adicionar outro elemento (s/n)? ')    
                 boleano = True
         if boleano == False: # se o nome não for achado dentro da lista principal
-            print(f'Conjunto "{nome}" inexistente')
+            print(f'Conjunto "{nome_conjunto}" inexistente')
 
 def remover_elemento_conjunto():
     if len(lista_conjuntos) == 0: # se a lista principal estiver vazia, ou seja, sem nenhum conjunto adicionado
         print('A lista de conjuntos está vazia. Adicione um conjunto primeiro!')
-    else:
-        nome = input('Qual nome do conjunto? ')
+    else: # se a lista principal não estiver vazia
+        nome_conjunto = input('Qual nome do conjunto? ')
         for conjunto in lista_conjuntos:
-            if nome == conjunto[0]:
-                escolha = 0
+            if nome_conjunto == conjunto[0]:
+                escolha = 's'
                 while escolha != 'n':
                     remover = int(input('Qual elemento você deseja remover? '))
                     if remover in conjunto[1]:
@@ -86,7 +86,7 @@ def remover_elemento_conjunto():
 def mostrar_conjuntos():
     if len(lista_conjuntos) == 0: # se a lista principal estiver vazia, ou seja, sem nenhum conjunto adicionado
         print('A lista de conjuntos está vazia. Adicione um conjunto primeiro!')
-    else:
+    else: # se a lista principal não estiver vazia
         print('Conjuntos existentes:')
         for conjunto in lista_conjuntos:
             print(f'Conjunto: {conjunto[0]}')
@@ -157,6 +157,7 @@ def intersecao_conjuntos():
                if elemento_fixo != elementos_lista:
                    lista_intersecao.remove(elemento_fixo)
     print(lista_intersecao)
+
 while True:
     escolha = menu()
     if escolha == '1':
