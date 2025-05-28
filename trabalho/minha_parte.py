@@ -15,7 +15,7 @@ def menu():
     opcao = input('Escolha uma opção: ')
     return opcao
 
-def criar_conjunto(): # Nesse def iremos dar o nome do conjunto e criar um conjunto 
+def criar_conjunto(): # Função para criar um conjunto                                                
     elementos = [] 
     conjunto_elementos = []
     nome_conjunto = input('Qual o nome do conjunto? ')
@@ -48,7 +48,7 @@ def criar_conjunto(): # Nesse def iremos dar o nome do conjunto e criar um conju
     print()
     print('-=' * 25)
 
-def add_elemento_conjunto(): # Nesse def iremos adicionar elementos a um conjunto existente
+def add_elemento_conjunto(): # Função para adicionar elementos a um conjunto existente
     print()
     print('-=' * 25)
     print()
@@ -158,27 +158,22 @@ def uniao_conjuntos(): # função para mostrar a união entre 2 conjuntos
                 uniao = []
                 todos_conjuntos = []
                 nome_conjunto = nome_primeiro_conjunto # variável para ajudar na verificação posteriormente
-                for i in range(0, len(lista_conjuntos)): # loop irá rodar de acordo com a quantidade de conjuntos presentes na lista principal
-                    for conjunto in lista_conjuntos:
-                        if nome_conjunto == conjunto[0] and nome_conjunto == nome_primeiro_conjunto: # verifica se o nome que usuário digitou está na lista e se é igual ao primeiro nome 
-                            todos_conjuntos.append(conjunto[1]) # adiciona todos os elementos de um conjunto 
-                            for elementos in conjunto[1]:
-                                uniao.append(elementos) # adiciona elementos a lista 'uniao' 
-                        if i == 1 and nome_conjunto == conjunto[0]:
-                            todos_conjuntos.append(conjunto[1])
-                            for elementos in conjunto[1]:
-                                if elementos not in uniao:
-                                    uniao.append(elementos)
-                    nome_conjunto = nome_segundo_conjunto
-                cont = 0
-                for nome_conj in nomes_conjuntos:
+                for conjunto in lista_conjuntos:
+                    if conjunto[0] == nome_primeiro_conjunto: # verifica se o nome que usuário digitou está na lista e se é igual ao primeiro nome do conjunto que o usuário escolheu
+                        todos_conjuntos.append(conjunto[1]) # adiciona todos os elementos de um conjunto 
+                        for elemento in conjunto[1]:
+                            uniao.append(elemento) # adiciona elementos a lista 'uniao' 
+                    if conjunto[0] == nome_segundo_conjunto: # verifica se o nome que usuário digitou está na lista e se é igual ao segundo nome do conjunto que o usuário escolheu
+                        todos_conjuntos.append(conjunto[1])
+                        for elemento in conjunto[1]:
+                            if elemento not in uniao: # se o elemento não tiver na lista 'uniao'
+                                uniao.append(elemento)
+                for indice in range(2):
                     print()
-                    print(f'Conjunto "{nome_conj}": {todos_conjuntos[cont]}')
-                    cont += 1
+                    print(f'Conjunto "{nomes_conjuntos[indice][0]}": {todos_conjuntos[indice]}')
                 print()
-                print(f'União:',end=' ')
                 uniao.sort()
-                print(uniao)
+                print(f'União: {uniao}')
             else:
                 print(f'Conjunto "{nome_segundo_conjunto}" não escontrado')
         else:
