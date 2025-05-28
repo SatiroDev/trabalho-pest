@@ -27,8 +27,8 @@ def criar_conjunto(): # Nesse def iremos dar o nome do conjunto e criar um conju
     print()
     print('-=' * 25)
     print()
-    if boleano == True: # se o nome já estiver sido adicionado
-        print(f'Conjunto com o nome "{nome_conjunto}" já existe')
+    if boleano == True: # se o nome do conjunto já estiver sido adicionado
+        print(f'Conjunto com o nome "{nome_conjunto}" já existe!')
     else: # se o nome do conjunto não estiver sido adicionado
         conjunto_elementos.append(nome_conjunto)
         print(f'Conjunto "{nome_conjunto}" adicionado com sucesso!')
@@ -40,7 +40,7 @@ def criar_conjunto(): # Nesse def iremos dar o nome do conjunto e criar um conju
                     elementos.append(elemento) # adiciona o elemento a lista 'elementos'
                     print(f'Elemento "{elemento}" adicionado com sucesso!')
                 else: # se o elemento já estiver sido adicionado antes
-                    print(f'Elemento "{elemento}" repetido')
+                    print(f'Elemento "{elemento}" repetido!')
                 print()
                 escolha = input('Deseja adicionar outro elemento (s/n)? ') 
         conjunto_elementos.append(elementos) # adiciona a lista 'elementos' em 'conjunto_elementos' 
@@ -59,7 +59,7 @@ def add_elemento_conjunto(): # Nesse def iremos adicionar elementos a um conjunt
         boleano = False
         nome_conjunto = input('Qual o nome do conjunto? ')
         for conjunto in lista_conjuntos:
-            if nome_conjunto == conjunto[0]: # verifica se o nome é igual a algum nome de conjunto que está adicionado a lista principal
+            if nome_conjunto == conjunto[0]: # verifica se o nome do conjunto escolhido pelo usuário é igual a algum nome de conjunto que está adicionado a lista principal
                 escolha = 's'
                 while escolha != 'n':
                     elemento = int(input('Qual o elemento deseja adicionar? ')) 
@@ -67,12 +67,12 @@ def add_elemento_conjunto(): # Nesse def iremos adicionar elementos a um conjunt
                         conjunto[1].append(elemento)
                         print(f'Elemento "{elemento}" adicionado com sucesso!')
                     else: # se o elemento já estiver adicionado
-                        print(f'Elemento "{elemento}" já existente')
+                        print(f'Elemento "{elemento}" já existente!')
                     print()
                     escolha = input('Deseja adicionar outro elemento (s/n)? ')    
                 boleano = True
-        if boleano == False: # se o nome não for achado dentro da lista principal
-            print(f'Conjunto "{nome_conjunto}" inexistente')
+        if boleano == False: # se o nome do conjunto escolhido pelo usuário não for achado dentro da lista principal
+            print(f'Conjunto "{nome_conjunto}" inexistente!')
     print()
     print('-=' * 25)
 
@@ -86,7 +86,7 @@ def remover_elemento_conjunto():
         boleano = False
         nome_conjunto = input('Qual nome do conjunto? ')
         for conjunto in lista_conjuntos:
-            if nome_conjunto == conjunto[0]: # verifica se o nome é igual a algum nome de conjunto que está adicionado a lista principal
+            if nome_conjunto == conjunto[0]: # verifica se o nome do conjunto escolhido pelo usuário é igual a algum nome de conjunto que está adicionado a lista principal
                 boleano = True
                 escolha = 's'
                 while escolha != 'n':
@@ -95,11 +95,11 @@ def remover_elemento_conjunto():
                         conjunto[1].remove(remover)
                         print(f'Elemento "{remover}" removido com sucesso!')
                     else: # se o elemento não estiver na sub lista dos elementos do conjunto escolhido
-                        print(f'Elemento {remover}" não encontrado')
+                        print(f'Elemento {remover}" não encontrado!')
                     print()
                     escolha = input('Deseja remover outro elemento (s/n)? ')
-        if boleano == False:
-            print(f'Conjunto "{nome_conjunto}" inexistente')   
+        if boleano == False: # se o nome do conjunto escolhido pelo usuário não for achado dentro da lista principal
+            print(f'Conjunto "{nome_conjunto}" inexistente!')   
     print()
     print('-=' * 25) 
 
@@ -112,25 +112,31 @@ def mostrar_conjuntos():
         print()
     else: # se a lista principal não estiver vazia
         print('Conjuntos existentes:')
-        for conjunto in lista_conjuntos:
+        for conjunto in lista_conjuntos: # loop para mostrar os conjuntos e seu elementos 
             print(f'Conjunto: {conjunto[0]}')
             print(f'Elementos: {conjunto[1]}')
             print()
     print('-=' * 25)
 
 def apagar_conjunto():
+    print()
+    print('-=' * 25)
+    print()
     boleano = False
-    if len(lista_conjuntos) == 0:
+    if len(lista_conjuntos) == 0: # se a lista principal estiver vazia, ou seja, sem nenhum conjunto adicionado
         print('A lista de conjuntos está vazia. Adicione um conjunto primeiro!')
-    else:
+    else: # se a lista principal não estiver vazia
         nome_conjunto = input('Qual conjunto deseja apagar? ')
         for conjunto in lista_conjuntos:
-            if conjunto[0] == nome_conjunto:
+            if conjunto[0] == nome_conjunto: # verifica se o nome do conjunto escolhido pelo usuário é igual a algum nome de conjunto que está adicionado a lista principal
                 boleano = True
                 lista_conjuntos.remove(conjunto)
-                print('Conjunto removido com sucesso!')
-    if boleano == False:
+                print(f'Conjunto "{nome_conjunto}" removido com sucesso!')
+    if boleano == False: # se o nome do conjunto escolhido pelo usuário não for achado dentro da lista principal
         print('Conjunto não encontrado!')
+    print()
+    print('-=' * 25) 
+
 def uniao_conjuntos():
     lista_uniao = [] 
     boleano = True
