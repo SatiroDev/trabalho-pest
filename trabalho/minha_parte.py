@@ -1,8 +1,7 @@
 lista_conjuntos = []
 
 def menu():
-    print('_'*23,end='MENU')
-    print('_'*23)
+    print(f"{'_'*23}MENU{'_'*23}")
     print('1. Criar conjunto')
     print('2. Adicionar elemento (Em um conjunto ja existente!)')
     print('3. Remover elemento de um conjunto')
@@ -25,6 +24,9 @@ def criar_conjunto(): # Nesse def iremos dar o nome do conjunto e criar um conju
         if nome_conjunto == conjunto[0]: # se o nome do conjunto for igual a algum nome de conjunto já adicionado
             boleano = True
             break
+    print()
+    print('-=' * 25)
+    print()
     if boleano == True: # se o nome já estiver sido adicionado
         print(f'Conjunto com o nome "{nome_conjunto}" já existe')
     else: # se o nome do conjunto não estiver sido adicionado
@@ -39,9 +41,12 @@ def criar_conjunto(): # Nesse def iremos dar o nome do conjunto e criar um conju
                     print(f'Elemento "{elemento}" adicionado com sucesso!')
                 else: # se o elemento já estiver sido adicionado antes
                     print(f'Elemento "{elemento}" repetido')
+                print()
                 escolha = input('Deseja adicionar outro elemento (s/n)? ') 
         conjunto_elementos.append(elementos) # adiciona a lista 'elementos' em 'conjunto_elementos' 
         lista_conjuntos.append(conjunto_elementos) # adiciona a lista 'conjunto_elementos' em 'lista_conjuntos' -> (lista principal)
+    print()
+    print('-=' * 25)
 
 def add_elemento_conjunto(): # Nesse def iremos adicionar elementos a um conjunto existente
     if len(lista_conjuntos) == 0: # se a lista principal estiver vazia, ou seja, sem nenhum conjunto adicionado
