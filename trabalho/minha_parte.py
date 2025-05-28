@@ -16,28 +16,35 @@ def menu():
     opcao = input('Escolha uma opção: ')
     return opcao
 
-def criar_conjunto(): #Nesse def iremos dar o nome do conjunto e criar um conjunto 
+def criar_conjunto(): # Nesse def iremos dar o nome do conjunto e criar um conjunto 
     elementos = [] 
     conjunto_elementos = []
-    escolha = 0
     nome_conjunto = input('Qual o nome do conjunto? ')
-    conjunto_elementos.append(nome_conjunto)
-    print(f'Conjunto "{nome_conjunto}" adicionado com sucesso!')
-    print()
-    escolha = 0
-    while escolha != 'n':
-            elemento = int(input('Qual elemento você deseja adicionar: '))
-            if elemento not in elementos: # se o elemento não estiver sido adicionado antes 
-                elementos.append(elemento) # adiciona o elemento a lista 'elementos'
-                print(f'Elemento "{elemento}" adicionado com sucesso!')
-            else: # se o elemento já estiver sido adicionado antes
-                print(f'Elemento "{elemento}" repetido')
-            escolha = input('Deseja adicionar outro elemento (s/n)? ') 
-    conjunto_elementos.append(elementos) # adiciona a lista 'elementos' em 'conjunto_elementos' 
-    lista_conjuntos.append(conjunto_elementos) # adiciona a lista 'conjunto_elementos' em 'lista_conjuntos' -> (lista principal)
+    boleano = False
+    for conjunto in lista_conjuntos:
+        if nome_conjunto == conjunto[0]:
+            boleano = True
+            break
+    if boleano == True:
+        print(f'Conjunto com o nome "{nome_conjunto}" já existe')
+    else:
+        conjunto_elementos.append(nome_conjunto)
+        print(f'Conjunto "{nome_conjunto}" adicionado com sucesso!')
+        print()
+        escolha = 0
+        while escolha != 'n':
+                elemento = int(input('Qual elemento você deseja adicionar: '))
+                if elemento not in elementos: # se o elemento não estiver sido adicionado antes 
+                    elementos.append(elemento) # adiciona o elemento a lista 'elementos'
+                    print(f'Elemento "{elemento}" adicionado com sucesso!')
+                else: # se o elemento já estiver sido adicionado antes
+                    print(f'Elemento "{elemento}" repetido')
+                escolha = input('Deseja adicionar outro elemento (s/n)? ') 
+        conjunto_elementos.append(elementos) # adiciona a lista 'elementos' em 'conjunto_elementos' 
+        lista_conjuntos.append(conjunto_elementos) # adiciona a lista 'conjunto_elementos' em 'lista_conjuntos' -> (lista principal)
 
-def add_elemento_conjunto(): #Nesse def iremos adicionar elementos a um conjunto existente
-    if len(lista_conjuntos) == 0: # se a lista estiver vazia, ou seja, sem nenhum conjunto adicionado
+def add_elemento_conjunto(): # Nesse def iremos adicionar elementos a um conjunto existente
+    if len(lista_conjuntos) == 0: # se a lista principal estiver vazia, ou seja, sem nenhum conjunto adicionado
         print('A lista de conjuntos está vazia. Adicione um conjunto primeiro!')
     else: # se a lista não estiver vazia
         boleano = False
@@ -54,11 +61,11 @@ def add_elemento_conjunto(): #Nesse def iremos adicionar elementos a um conjunto
                         print(f'Elemento "{elemento}" já existente')
                     escolha = input('Deseja adicionar outro elemento (s/n)? ')    
                 boleano = True
-        if boleano == False:
+        if boleano == False: # se o nome não for achado dentro da lista principal
             print(f'Conjunto "{nome}" inexistente')
 
 def remover_elemento_conjunto():
-    if len(lista_conjuntos) == 0:
+    if len(lista_conjuntos) == 0: # se a lista principal estiver vazia, ou seja, sem nenhum conjunto adicionado
         print('A lista de conjuntos está vazia. Adicione um conjunto primeiro!')
     else:
         nome = input('Qual nome do conjunto? ')
@@ -77,7 +84,7 @@ def remover_elemento_conjunto():
                 print('Elemento inexistente')    
 
 def mostrar_conjuntos():
-    if len(lista_conjuntos) == 0:
+    if len(lista_conjuntos) == 0: # se a lista principal estiver vazia, ou seja, sem nenhum conjunto adicionado
         print('A lista de conjuntos está vazia. Adicione um conjunto primeiro!')
     else:
         print('Conjuntos existentes:')
