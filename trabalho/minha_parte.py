@@ -37,7 +37,6 @@ def criar_conjunto(): #Nesse def iremos dar o nome do conjunto e criar um conjun
     lista_conjuntos.append(conjunto_elementos) # adiciona a lista 'conjunto_elementos' em 'lista_conjuntos' -> (lista principal)
 
 def add_elemento_conjunto(): #Nesse def iremos adicionar elementos a um conjunto existente
-    
     if len(lista_conjuntos) == 0: # se a lista estiver vazia, ou seja, sem nenhum conjunto adicionado
         print('A lista de conjuntos está vazia. Adicione um conjunto primeiro!')
     else: # se a lista não estiver vazia
@@ -78,9 +77,15 @@ def remover_elemento_conjunto():
                 print('Elemento inexistente')    
 
 def mostrar_conjuntos():
-    for conjunto in lista_conjuntos:
-        for elementos in range(0, len(conjunto)):
-            print(f'Os elementos do {conjunto[0]} são: {lista_conjuntos[conjunto][elementos]}')
+    if len(lista_conjuntos) == 0:
+        print('A lista de conjuntos está vazia. Adicione um conjunto primeiro!')
+    else:
+        print('Conjuntos existentes:')
+        for conjunto in lista_conjuntos:
+            print(f'Conjunto: {conjunto[0]}')
+            print(f'Elementos: {conjunto[1]}')
+            print()
+
 def apagar_conjunto():
     boleano = False
     if len(lista_conjuntos) == 0:
