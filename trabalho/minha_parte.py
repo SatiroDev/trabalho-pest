@@ -249,6 +249,7 @@ def intersecao_conjuntos():
         print('~'*50)
         print()
         print('Digite dois de conjuntos para ver a união deles!')
+        print('.'*50)
         nome_primeiro_conjunto = input('Nome do primeiro conjunto: ')
         if nome_primeiro_conjunto in nomes_conjuntos:
             nome_segundo_conjunto = input('Nome do segundo conjunto: ')
@@ -281,20 +282,19 @@ def intersecao_conjuntos():
                                 if elementos in verificar:
                                     interseccao.append(elementos) # adiciona elementos a lista 'interseccao' 
 
-                print('.'*50)
                 for conjunto in conjuntos_elementos:
                     print()     
                     print(f'Conjunto "{conjunto[0]}": {conjunto[1]}')
                 print()
                 interseccao.sort()
                 print(f'Intersecção: {interseccao}')
-                print('.'*50)
 
             else:
                 print(f'Conjunto "{nome_segundo_conjunto}" não encontrado!')
 
         else:
             print(f'Conjunto "{nome_primeiro_conjunto}" não encontrado!')
+        print('.'*50)
 
     print()
     print('-=' * 25) 
