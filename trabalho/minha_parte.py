@@ -183,27 +183,12 @@ def uniao_conjuntos(): # função para mostrar a união entre 2 conjuntos
             print(f'Conjunto "{nome_primeiro_conjunto}" não escontrado')
 
 def intersecao_conjuntos():
-    lista_intersecao = [] 
-    conjunto1 = input('Qual o primeiro conjunto para fazer a interseção? ')
-    for conjunto in lista_conjuntos:
-        if conjunto1 in conjunto[0]:
-            conjunto2 = input('Qual o segundo conjunto para fazer a interseção? ')
-        if conjunto2 in conjunto[0]:
-            for conjuntox in lista_conjuntos:
-                if conjuntox[0] == conjunto1:
-                    for numero in conjuntox[1]:
-                        lista_intersecao.append(numero)
-                if conjuntox[0] == conjunto2:
-                     for numero in conjuntox[1]:
-                        lista_intersecao.append(numero)
-        else:
-            print('Conjunto inexistente')
-        cp_lista_uniao = lista_intersecao
-        for elemento_fixo in cp_lista_uniao:
-           for elementos_lista in lista_intersecao:
-               if elemento_fixo != elementos_lista:
-                   lista_intersecao.remove(elemento_fixo)
-    print(lista_intersecao)
+    if len(lista_conjuntos) == 0: # verifica se a lista está vazia
+        print('Lista de conjunto está vazia!')
+    elif len(lista_conjuntos) <= 1: # verifica se na lista principal tem apenas um ou menos conjuntos adicionado
+        print('A lista de conjuntos tem que conter pelo menos 2 conjuntos!')   
+    else:
+        pass
 
 while True:
     escolha = menu()
