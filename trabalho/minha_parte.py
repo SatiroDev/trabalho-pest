@@ -160,7 +160,7 @@ def uniao_conjuntos(): # função para mostrar a união entre 2 conjuntos
 
                 for conjunto in lista_conjuntos:
                     if conjunto[0] == nome_primeiro_conjunto: # verifica se o nome que usuário digitou está na lista e se é igual ao primeiro nome do conjunto que o usuário escolheu
-                        conjuntos_elementos.append([nome_primeiro_conjunto,conjunto[1]]) # adiciona todos os elementos de um conjunto 
+                        conjuntos_elementos.append([nome_primeiro_conjunto,conjunto[1]]) 
                         for elemento in conjunto[1]:
                             if elemento not in uniao: # se o elemento não tiver na lista 'uniao'
                                 uniao.append(elemento) 
@@ -173,7 +173,7 @@ def uniao_conjuntos(): # função para mostrar a união entre 2 conjuntos
                                 uniao.append(elemento)
                 for conjunto in conjuntos_elementos:
                     print()     
-                    print(f'Conjunto "{conjunto[0]}": {conjuntos_elementos[1]}')
+                    print(f'Conjunto "{conjunto[0]}": {conjunto[1]}')
                 print()
                 uniao.sort()
                 print(f'União: {uniao}')
