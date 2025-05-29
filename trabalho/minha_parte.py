@@ -54,8 +54,7 @@ def add_elemento_conjunto(): # Função para adicionar elementos a um conjunto e
     print()
     if len(lista_conjuntos) == 0: # se a lista principal estiver vazia, ou seja, sem nenhum conjunto adicionado
         print('A lista de conjuntos está vazia. Adicione um conjunto primeiro!')
-    else: # se a lista principal não estiver vazia
-        
+    else: # se a lista principal não estiver vazia       
         boleano = False
         nome_conjunto = input('Qual o nome do conjunto? ')
         for conjunto in lista_conjuntos:
