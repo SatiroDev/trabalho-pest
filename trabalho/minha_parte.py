@@ -138,6 +138,9 @@ def apagar_conjunto():
     print('-=' * 25) 
 
 def uniao_conjuntos(): # função para mostrar a união entre 2 conjuntos
+    print()
+    print('-=' * 25)
+    print()
     if len(lista_conjuntos) == 0: # verifica se a lista está vazia
         print('Lista de conjunto está vazia!')
     elif len(lista_conjuntos) <= 1: # verifica se na lista principal tem apenas um ou menos conjuntos adicionado
@@ -181,14 +184,63 @@ def uniao_conjuntos(): # função para mostrar a união entre 2 conjuntos
                 print(f'Conjunto "{nome_segundo_conjunto}" não escontrado')
         else:
             print(f'Conjunto "{nome_primeiro_conjunto}" não escontrado')
+    print()
+    print('-=' * 25) 
 
 def intersecao_conjuntos():
+    print()
+    print('-=' * 25)
+    print()
     if len(lista_conjuntos) == 0: # verifica se a lista está vazia
         print('Lista de conjunto está vazia!')
     elif len(lista_conjuntos) <= 1: # verifica se na lista principal tem apenas um ou menos conjuntos adicionado
         print('A lista de conjuntos tem que conter pelo menos 2 conjuntos!')   
     else:
-        pass
+        print('Conjuntos existentes:')
+        nomes_conjuntos = [] # lista para armazenar os nomes dos conjuntos (para melhorar a verificação posteriormente)
+        for conjunto in lista_conjuntos:
+            print(conjunto)
+            nomes_conjuntos.append(conjunto[0]) # adiciona o nome do conjunto
+        print('Digite dois de conjuntos para ver a união deles')
+        nome_primeiro_conjunto = input('Nome do primeiro conjunto: ')
+        if nome_primeiro_conjunto in nomes_conjuntos:
+            nome_segundo_conjunto = input('Nome do segundo conjunto: ')
+            if nome_segundo_conjunto == nome_primeiro_conjunto: # verifica se o usuário repetiu o nome do conjunto
+                print('Não pode repetir o nome do conjunto escolhido anteriormente!')
+            elif nome_segundo_conjunto in nomes_conjuntos:
+                interseccao = []
+                conjuntos_elementos = []
+                verificar = 0
+                for conjunto in lista_conjuntos:
+                    if conjunto[0] == nome_primeiro_conjunto: # verifica se o nome que usuário digitou está na lista e se é igual ao primeiro nome 
+                        conjuntos_elementos.append([nome_primeiro_conjunto, conjunto[1]]) 
+                        if verificar == 0:
+                            verificar = conjunto[1]
+                        else:
+                            for elementos in conjunto[1]:
+                                if elementos in verificar:
+                                    interseccao.append(elementos) # adiciona elementos a lista 'interseccao' 
+                    if nome_segundo_conjunto == conjunto[0]:
+                        conjuntos_elementos.append([nome_segundo_conjunto, conjunto[1]])
+                        if verificar == 0:
+                            verificar = conjunto[1]
+                        else:
+                            for elementos in conjunto[1]:
+                                if elementos in verificar:
+                                    interseccao.append(elementos) # adiciona elementos a lista 'interseccao' 
+                for conjunto in conjuntos_elementos:
+                    print()     
+                    print(f'Conjunto "{conjunto[0]}": {conjunto[1]}')
+                print()
+                interseccao.sort()
+                print(f'Intersecção: {interseccao}')
+
+            else:
+                print(f'Conjunto "{nome_segundo_conjunto}" não escontrado')
+        else:
+            print(f'Conjunto "{nome_primeiro_conjunto}" não escontrado')
+    print()
+    print('-=' * 25) 
 
 while True:
     escolha = menu()
