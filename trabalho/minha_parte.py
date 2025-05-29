@@ -156,22 +156,24 @@ def uniao_conjuntos(): # função para mostrar a união entre 2 conjuntos
                 print('Não pode repetir o nome do conjunto escolhido anteriormente!')
             elif nome_segundo_conjunto in nomes_conjuntos: # se o segundo nome do conjunto que o usuário escolheu tiver dentro da lista 'nomes_conjuntos'
                 uniao = []
-                todos_conjuntos = []
-                nome_conjunto = nome_primeiro_conjunto # variável para ajudar na verificação posteriormente
+                conjuntos_elementos = []
+
                 for conjunto in lista_conjuntos:
                     if conjunto[0] == nome_primeiro_conjunto: # verifica se o nome que usuário digitou está na lista e se é igual ao primeiro nome do conjunto que o usuário escolheu
-                        todos_conjuntos.append(conjunto[1]) # adiciona todos os elementos de um conjunto 
+                        conjuntos_elementos.append([nome_primeiro_conjunto,conjunto[1]]) # adiciona todos os elementos de um conjunto 
                         for elemento in conjunto[1]:
                             if elemento not in uniao: # se o elemento não tiver na lista 'uniao'
                                 uniao.append(elemento) 
+                        
+
                     if conjunto[0] == nome_segundo_conjunto: # verifica se o nome que usuário digitou está na lista e se é igual ao segundo nome do conjunto que o usuário escolheu
-                        todos_conjuntos.append(conjunto[1])
+                        conjuntos_elementos.append([nome_segundo_conjunto,conjunto[1]])
                         for elemento in conjunto[1]:
                             if elemento not in uniao: # se o elemento não tiver na lista 'uniao'
                                 uniao.append(elemento)
-                for indice in range(2):
-                    print()
-                    print(f'Conjunto "{nomes_conjuntos[indice][0]}": {todos_conjuntos[indice]}')
+                for conjunto in conjuntos_elementos:
+                    print()     
+                    print(f'Conjunto "{conjunto[0]}": {conjuntos_elementos[1]}')
                 print()
                 uniao.sort()
                 print(f'União: {uniao}')
