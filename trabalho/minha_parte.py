@@ -162,7 +162,8 @@ def uniao_conjuntos(): # função para mostrar a união entre 2 conjuntos
                     if conjunto[0] == nome_primeiro_conjunto: # verifica se o nome que usuário digitou está na lista e se é igual ao primeiro nome do conjunto que o usuário escolheu
                         todos_conjuntos.append(conjunto[1]) # adiciona todos os elementos de um conjunto 
                         for elemento in conjunto[1]:
-                            uniao.append(elemento) # adiciona elementos a lista 'uniao' 
+                            if elemento not in uniao: # se o elemento não tiver na lista 'uniao'
+                                uniao.append(elemento) 
                     if conjunto[0] == nome_segundo_conjunto: # verifica se o nome que usuário digitou está na lista e se é igual ao segundo nome do conjunto que o usuário escolheu
                         todos_conjuntos.append(conjunto[1])
                         for elemento in conjunto[1]:
