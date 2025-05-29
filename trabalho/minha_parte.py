@@ -102,7 +102,7 @@ def remover_elemento_conjunto():
                         conjunto[1].remove(remover)
                         print(f'Elemento "{remover}" removido com sucesso!')
                     else: # se o elemento não estiver na sub lista dos elementos do conjunto escolhido
-                        print(f'Elemento {remover}" não encontrado!')
+                        print(f'Elemento "{remover}" não encontrado!')
                     print()
                     escolha = input('Deseja remover outro elemento (s/n)? ')
         if boleano == False: # se o nome do conjunto escolhido pelo usuário não for achado dentro da lista principal
@@ -170,6 +170,7 @@ def uniao_conjuntos(): # função para mostrar a união entre 2 conjuntos
             if nome_segundo_conjunto == nome_primeiro_conjunto: # verifica se o usuário repetiu o nome do conjunto
                 print('Não pode repetir o nome do conjunto escolhido anteriormente!')
             elif nome_segundo_conjunto in nomes_conjuntos: # se o segundo nome do conjunto que o usuário escolheu tiver dentro da lista 'nomes_conjuntos'
+
                 uniao = []
                 conjuntos_elementos = []
                 for conjunto in lista_conjuntos:
@@ -190,9 +191,9 @@ def uniao_conjuntos(): # função para mostrar a união entre 2 conjuntos
                 uniao.sort()
                 print(f'União: {uniao}')
             else:
-                print(f'Conjunto "{nome_segundo_conjunto}" não escontrado')
+                print(f'Conjunto "{nome_segundo_conjunto}" não encontrado')
         else:
-            print(f'Conjunto "{nome_primeiro_conjunto}" não escontrado')
+            print(f'Conjunto "{nome_primeiro_conjunto}" não encontrado')
     print()
     print('-=' * 25) 
 
@@ -205,12 +206,13 @@ def intersecao_conjuntos():
     elif len(lista_conjuntos) <= 1: # verifica se na lista principal tem apenas um ou menos conjuntos adicionado
         print('A lista de conjuntos tem que conter pelo menos 2 conjuntos!')   
     else:
-        print('Conjuntos existentes:')
         nomes_conjuntos = [] # lista para armazenar os nomes dos conjuntos (para melhorar a verificação posteriormente)
+        print('~'*50)
         print('Conjuntos existentes:')
         for conjunto in lista_conjuntos: # loop apenas para ajudar a fazer os testes
             print(f'Conjunto: "{conjunto[0]}", elementos: {conjunto[1]}')
             nomes_conjuntos.append(conjunto[0]) # adiciona o nome do conjunto
+        print('~'*50)
         print()
         print('Digite dois de conjuntos para ver a união deles')
         nome_primeiro_conjunto = input('Nome do primeiro conjunto: ')
@@ -219,6 +221,7 @@ def intersecao_conjuntos():
             if nome_segundo_conjunto == nome_primeiro_conjunto: # verifica se o usuário repetiu o nome do conjunto
                 print('Não pode repetir o nome do conjunto escolhido anteriormente!')
             elif nome_segundo_conjunto in nomes_conjuntos:
+                print()
                 interseccao = []
                 conjuntos_elementos = []
                 verificar = 0
