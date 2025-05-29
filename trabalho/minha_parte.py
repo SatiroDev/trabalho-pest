@@ -221,7 +221,7 @@ def uniao_conjuntos(): # função para mostrar a união entre 2 conjuntos
                 print()
                 uniao.sort()
                 print(f'União: {uniao}')
-
+                print()
                 print('-'*50)
 
             else:
@@ -235,7 +235,7 @@ def uniao_conjuntos(): # função para mostrar a união entre 2 conjuntos
     print()
     print('-=' * 25) 
 
-def intersecao_conjuntos():
+def interseccao_conjuntos():
     print()
     print('-=' * 25)
     print()
@@ -255,7 +255,7 @@ def intersecao_conjuntos():
         print('~'*50)
         print()
         print('.'*50)
-        print('Digite dois de conjuntos para ver a união deles!')
+        print('Digite dois de conjuntos para ver a intersecção deles!')
         print()
         nome_primeiro_conjunto = input('Nome do primeiro conjunto: ')
         if nome_primeiro_conjunto in nomes_conjuntos:
@@ -297,7 +297,7 @@ def intersecao_conjuntos():
                 print()
                 interseccao.sort()
                 print(f'Intersecção: {interseccao}')
-
+                print()
                 print('-'*50)
 
             else:
@@ -326,7 +326,7 @@ while True:
     elif escolha == '6':
         uniao_conjuntos()
     elif escolha == '7':
-        intersecao_conjuntos()
+        interseccao_conjuntos()
     elif escolha == '8':
         print('Fim do programa!')
         break
