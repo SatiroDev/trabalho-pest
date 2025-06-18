@@ -22,7 +22,6 @@ def menu_edicao():
     print('3. Email')
     opcao = input('Escolha uma opção: [1,2,3] ').lower()
     print('-=-' * 15)
-    print(' - '*15)
     return opcao
 
 def mostrar_contatos():
@@ -34,7 +33,7 @@ def mostrar_contatos():
         print(f'{cont}- {nome_user}')
         cont += 1
     print('-=-' * 15)
-    print(' - '*15)
+
 
 def adicionar_contato(agenda, usuario, nome, celular, email):
     print()
@@ -82,8 +81,8 @@ def editar_contato(agenda, usuario, campo, novo_valor):
     print(' - '*15)
     print(f'Novo {nome_campo} salvo com sucesso!')
     salvar_agenda(agenda)
-    print('-=-' * 15)
     print(' - '*15)
+    print('-=-' * 15)
 
 def remover_contato(agenda, usuario):
     print()
@@ -95,17 +94,16 @@ def remover_contato(agenda, usuario):
 
     else:
         print(f'Usuário "{usuario}" não encontrado!')
-    print(' - '*15)
     print('-=-' * 15)
 
 def salvar_agenda(agenda):
 
-    with open('contatos.json', 'w') as f:
+    with open('contatos.json', 'w', encoding='utf-8') as f:
         json.dump(agenda, f, ensure_ascii=False, indent=4)
 
 def carregar_agenda():
     if 'contatos.json':
-        with open('contatos.json', 'r') as f:
+        with open('contatos.json', 'r', encoding='utf-8') as f:
             return json.load(f)
         
     else:
@@ -153,7 +151,8 @@ while True:
                         print('Erro! Email não aceito!')
 
             else:
-                print('O número tem que seguir esse padrão -> 99999-9999')
+
+                print('Erro! O número tem que seguir esse padrão -> 99999-9999')
 
         else:
             print('O usuário precisa começar com o "@"!')
@@ -221,7 +220,7 @@ while True:
                             editar_contato(agenda, usuario, opcao_edicao, novo_numero)         
 
                     else:
-                        print('O número tem que seguir esse padrão -> 99999-9999')
+                        print('Erro! O número tem que seguir esse padrão -> 99999-9999')
 
                 elif opcao_edicao == '3':
                     novo_email = input('Digite o novo email do contato: ').lower()
