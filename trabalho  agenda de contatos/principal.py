@@ -95,7 +95,7 @@ def remover_contato(agenda, usuario):
 def salvar_agenda(agenda):
 
     with open('contatos.json', 'w') as f:
-        json.dump(agenda, f)
+        json.dump(agenda, f, indent=4)
 
 def carregar_agenda():
     if 'contatos.json':
@@ -125,11 +125,10 @@ while True:
 
                 for num in numero:
                     contagem += 1
-
-                    if num in '0123456789' and numero[5] == '-':
-
-                        if contagem == 10:
-                            verificacao_geral = True
+                    if numero[5] == '-':
+                        if num in '0123456789':
+                            if contagem == 10:
+                                verificacao_geral = True
                         continue
 
                     else:
@@ -218,7 +217,7 @@ while True:
                     else:
                         print('O número tem que seguir esse padrão -> 99999-9999')
 
-                elif opcao_edicao == '3' or opcao_edicao == 'email':
+                elif opcao_edicao == '3':
                     novo_email = input('Digite o novo email do contato: ').lower()
                     if len(novo_email) > 10 and novo_email[-10:] == '@gmail.com' or novo_email[-12:] == '@outlook.com':
                         editar_contato(agenda, usuario, opcao_edicao, novo_email)
@@ -228,6 +227,7 @@ while True:
                 else:
                     verificacao = False
                     print('Opção inválida!')
+                    print('Digite "1" ou "2" ou "3"!')
 
             else:
                 print('Usuário não encontrado!')
@@ -252,3 +252,4 @@ while True:
 
     else:
         print('Escolha uma opção válida!')
+        print('Digite "1" ou "2" ou "3" ou "4" ou "5"!')
