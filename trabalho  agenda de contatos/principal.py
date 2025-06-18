@@ -18,6 +18,14 @@ def menu_edicao():
     opcao = input('Escolha uma opção: [1,2,3] ').lower()
     return opcao
 
+def mostrar_contatos():
+    print('Usuários adicionados: ')
+    cont = 1
+    for nome_user in agenda.keys():
+        print(f'{cont}- {nome_user}')
+        cont += 1
+    print()
+
 def adicionar_contato(agenda, usuario, nome, celular, email):
     agenda[usuario] = [nome, celular, email]
     
@@ -37,7 +45,6 @@ def buscar_contato(agenda, usuario):
         print(f'Usuário "{usuario}" não encontrado!')
     print()
     
-
 
 def editar_contato(agenda, usuario, campo, novo_valor):
     if campo == '1':
@@ -60,13 +67,16 @@ def editar_contato(agenda, usuario, campo, novo_valor):
     salvar_agenda(agenda)
 
 def remover_contato(agenda, usuario):
-    pass
+    if usuario in agenda.keys():
+        del agenda[usuario]
+        print(f'Usuário "{usuario}" removido com sucesso!')
+        salvar_agenda(agenda)
+    else:
+        print(f'Usuário "{usuario}" não encontrado!')
 
 def salvar_agenda(agenda):
     with open('contatos.json', 'w') as f:
         json.dump(agenda, f)
-
-
 
 def carregar_agenda():
     if 'contatos.json':
@@ -76,7 +86,6 @@ def carregar_agenda():
         return {}
 
 agenda = carregar_agenda()
-
 
 while True:
 
@@ -139,13 +148,7 @@ while True:
 
     elif opcao == '2':
         if len(agenda) >= 1:
-            print('Usuários adicionados: ')
-            cont = 1
-
-            for nome_user in agenda.keys():
-                print(f'{cont}- {nome_user}')
-                cont += 1
-            print()
+            mostrar_contatos()
             usuario = input('Digite o @ do usuário que deseja buscar informações: ').lower()
             buscar_contato(agenda, usuario)
 
@@ -155,13 +158,8 @@ while True:
     elif opcao == '3':
 
         if len(agenda) >= 1:
-            print('Usuários adicionados: ')
-            cont = 1
 
-            for nome_user in agenda.keys():
-                print(f'{cont}- {nome_user}')
-                cont += 1
-            print()
+            mostrar_contatos()
 
             usuario = input('Digite o seu nome de usuário: ').lower()
             if usuario in agenda.keys():
@@ -207,8 +205,7 @@ while True:
                                     break
 
                         if verificacao_geral == True:
-                            editar_contato(agenda, usuario, opcao_edicao, novo_numero)
-                            
+                            editar_contato(agenda, usuario, opcao_edicao, novo_numero)         
 
                     else:
                         print('O número tem que seguir esse padrão -> 99999-9999')
@@ -231,7 +228,13 @@ while True:
             print('Adicione pelo menos um contato para fazer uma busca!')
 
     elif opcao == '4':
-        remover_contato()
+        if len(agenda) >= 1:
+            mostrar_contatos()
+            usuario = input('Digite o nome do usuário que deseja remover: ').lower()
+            remover_contato(agenda, usuario)
+        else:
+            print('Adicione pelo menos um contato para fazer uma busca!')
+        
 
     elif opcao == '5':
         print('Saindo do programa...')
