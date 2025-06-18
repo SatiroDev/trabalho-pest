@@ -1,6 +1,7 @@
 import json
 
 def menu():
+    print('-=-' * 20)
     print('--- AGENDA DE CONTATOS ---')
     print('1. Adicionar contato')
     print('2. Buscar contato')
@@ -8,73 +9,91 @@ def menu():
     print('4. Remover contato')
     print('5. Sair')
     opcao = input('Escolha uma opção: [1,2,3,4,5] ')
+    print('-=-' * 20)
     return opcao
 
 def menu_edicao():
+    print('-=-' * 20)
     print('O que deseja editar? ')
     print('1. Nome')
     print('2. Número')
     print('3. Email')
     opcao = input('Escolha uma opção: [1,2,3] ').lower()
+    print('-=-' * 20)
+    print()
     return opcao
 
 def mostrar_contatos():
+    print('-=-' * 20)
     print('Usuários adicionados: ')
     cont = 1
     for nome_user in agenda.keys():
         print(f'{cont}- {nome_user}')
         cont += 1
+    print('-=-' * 20)
     print()
 
 def adicionar_contato(agenda, usuario, nome, celular, email):
+    print('-=-' * 20)
     agenda[usuario] = [nome, celular, email]
-    
+    salvar_agenda(agenda)
+    print('Contato salvo com sucesso!')
+    print('-=-' * 20)
+    print()
 
 def buscar_contato(agenda, usuario):
+    print('-=-' * 20)
+    if usuario in agenda.keys():
+        print()
+        print(f'Informações do(a) usuário(a) "{usuario}": ')
+        print(f'Nome: {agenda[usuario][0]}')
+        print(f'Número: {agenda[usuario][1]}')
+        print(f'Email: {agenda[usuario][2]}')
 
-    verificacao = False
-    for nome_de_usuario, informacoes in agenda.items():
-        if nome_de_usuario == usuario:
-            print()
-            print(f'Informações do(a) usuário(a) "{usuario}": ')
-            print(f'Nome: {informacoes[0]}')
-            print(f'Número: {informacoes[1]}')
-            print(f'Email: {informacoes[2]}')
-            verificacao = True
-    if verificacao == False:
+    else:
         print(f'Usuário "{usuario}" não encontrado!')
+    print('-=-' * 20)
     print()
-    
 
 def editar_contato(agenda, usuario, campo, novo_valor):
+    print('-=-' * 20)
     if campo == '1':
         nome_campo = 'nome'
 
-        for nome_de_usuario, informacoes in agenda.items():
-            if nome_de_usuario == usuario:
-                informacoes[0] = novo_valor
+        if usuario in agenda.keys():
+            agenda[usuario][0] = novo_valor
+        
     elif campo == '2':
         nome_campo = 'número'
-        for nome_de_usuario, informacoes in agenda.items():
-            if nome_de_usuario == usuario:
-                informacoes[1] = novo_valor
+
+        if usuario in agenda.keys():
+            agenda[usuario][1] = novo_valor
+        
     else:
         nome_campo = 'email'
-        for nome_de_usuario, informacoes in agenda.items():
-            if nome_de_usuario == usuario:
-                informacoes[2] = novo_valor
+
+        if usuario in agenda.keys():
+            agenda[usuario][2] = novo_valor
+
     print(f'Novo {nome_campo} salvo com sucesso!')
     salvar_agenda(agenda)
+    print('-=-' * 20)
+    print()
 
 def remover_contato(agenda, usuario):
+    print('-=-' * 20)
     if usuario in agenda.keys():
         del agenda[usuario]
         print(f'Usuário "{usuario}" removido com sucesso!')
         salvar_agenda(agenda)
+
     else:
         print(f'Usuário "{usuario}" não encontrado!')
+    print('-=-' * 20)
+    print()
 
 def salvar_agenda(agenda):
+
     with open('contatos.json', 'w') as f:
         json.dump(agenda, f)
 
@@ -82,6 +101,7 @@ def carregar_agenda():
     if 'contatos.json':
         with open('contatos.json', 'r') as f:
             return json.load(f)
+        
     else:
         return {}
 
@@ -92,14 +112,13 @@ while True:
     opcao = menu()
 
     if opcao == '1':
-        usuario = input('Digite o seu nome de usuário: ').lower()
+        usuario = input('Digite o nome de usuário: ').lower()
         verificacao_geral = False
 
         if usuario[0] == '@':
             nome = input('Digite o nome do contato: ')
             numero = input('Digite o número: (ex: 99999-9999) ')
             verificacao = True
-            verificacao_traco = False
             contagem = 0
 
             if len(numero) == 10:
@@ -107,35 +126,24 @@ while True:
                 for num in numero:
                     contagem += 1
 
-                    if num in '0123456789':
+                    if num in '0123456789' and numero[5] == '-':
 
                         if contagem == 10:
                             verificacao_geral = True
                         continue
 
-                    elif num == numero[5] and num == '-':
-                        verificacao_traco = True
-                        continue
-
                     else:
-
-                        if verificacao_traco == False:
-                            print('Precisa ter o "-"!')
-                            print('O número tem que seguir esse padrão -> 99999-9999')
-                            break
-
-                        else:
-                            print('Você tem que digitar números!')
-                            verificacao = False
-                            break
+                        print('Número inválido!')
+                        print('Você pode ter digitado letras sem querer, ou esqueceu do "-"!')
+                        verificacao = False
+                        break
 
                 if verificacao_geral == True:
                     email = input('Digite o email do contato: ').lower()
 
                     if len(email) > 10 and email[-10:] == '@gmail.com' or email[-12:] == '@outlook.com':
                         adicionar_contato(agenda, usuario, nome, numero, email)
-                        salvar_agenda(agenda)
-                        print('Contato salvo com sucesso!')
+
                     else:
                         print('Erro! Email não aceito!')
 
@@ -222,16 +230,18 @@ while True:
                     print('Opção inválida!')
 
             else:
-                print('Usuário nao encontrado!')
+                print('Usuário não encontrado!')
 
         else:
             print('Adicione pelo menos um contato para fazer uma busca!')
 
     elif opcao == '4':
+
         if len(agenda) >= 1:
             mostrar_contatos()
             usuario = input('Digite o nome do usuário que deseja remover: ').lower()
             remover_contato(agenda, usuario)
+
         else:
             print('Adicione pelo menos um contato para fazer uma busca!')
         
