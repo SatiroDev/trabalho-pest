@@ -1,4 +1,5 @@
 import json
+import os
 
 def menu():
     print()
@@ -98,12 +99,12 @@ def remover_contato(agenda, usuario):
 
 def salvar_agenda(agenda):
 
-    with open('contatos.json', 'w', encoding='utf-8') as f:
+    with open('agenda_de_contatos.json', 'w', encoding='utf-8') as f:
         json.dump(agenda, f, ensure_ascii=False, indent=4)
 
 def carregar_agenda():
-    if 'contatos.json':
-        with open('contatos.json', 'r', encoding='utf-8') as f:
+    if os.path.exists('agenda_de_contatos.json'):
+        with open('agenda_de_contatos.json', 'r', encoding='utf-8') as f:
             return json.load(f)
         
     else:
