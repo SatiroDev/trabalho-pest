@@ -122,17 +122,17 @@ while True:
 
         if usuario[0] == '@':
             nome = input('Digite o nome do contato: ')
-            numero = input('Digite o número: (ex: 99999-9999) ')
+            numero = input('Digite o número: (ex: 99999-9999) ').strip()
             verificacao = True
             contagem = 0
 
             if len(numero) == 10:
 
                 for num in numero:
-                    contagem += 1
                     if numero[5] == '-':
                         if num in '0123156789':
-                            if contagem == 10:
+                            contagem += 1
+                            if contagem == 9:
                                 verificacao_geral = True
                         continue
 
