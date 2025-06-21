@@ -117,63 +117,60 @@ while True:
     opcao = menu()
 
     if opcao == '1':
-        usuario = input('Digite o nome de usuário: ').lower()
-        verificacao_geral = False
+        usuario = input('Digite o nome de usuário: ').lower().strip()
+        if usuario not in agenda:
+            verificacao_geral = False
 
-        if usuario[0] == '@':
-            nome = input('Digite o nome do contato: ')
-            numero = input('Digite o número: (ex: 99999-9999) ').strip()
-            verificacao = True
-            contagem = 0
+            if usuario[0] == '@':
+                nome = input('Digite o nome do contato: ').title().strip()
+                numero = input('Digite o número: (ex: 99999-9999) ').strip()
+                contagem = 0
 
-            if len(numero) == 10:
+                if len(numero) == 10:
 
-                for num in numero:
-                    if numero[5] == '-':
-                        if num in '0123456789':
-                            contagem += 1
-                            if contagem == 9:
-                                verificacao_geral = True
-                        continue
-
-                    else:
-                        print('Número inválido!')
-                        print('Você pode ter digitado letras sem querer, ou esqueceu do "-"!')
-                        verificacao = False
-                        break
-
-                if verificacao_geral == True:
-                    email = input('Digite o email do contato: ').lower().strip()
-                    cont_arroba = email.count('@')
-
-                    pontos_seguidos = 0
-                    for i in range(len(email)+1):
-                        if i == len(email)-1:
-                            break
-                        if email[i] == email[i+1] and email[i] == '.':
-                            pontos_seguidos += 1
-                    posicao_arroba = email.index('@')
-                    if cont_arroba == 1 and email[0] != '@' and email[0] != '.' and email[-1] != '@' and email[-1] != '.' and pontos_seguidos == 0 and email[posicao_arroba-1] != '1' and email[posicao_arroba+1] != '.':
-                        if len(email[posicao_arroba:]) >= 4:
-                            sub_email = email[posicao_arroba:]
-                            if '.' in sub_email:
-                                posicao_ponto = sub_email.index('.')
-                                if '.' not in sub_email[-2:]:
-                                    pass
-                                else:
-                                    print('Email inválido!')
-                            else:
-                                print('Email inválido!')
+                    for num in numero:
+                        if numero[5] == '-':
+                            if num in '0123456789':
+                                contagem += 1
+                                if contagem == 9:
+                                    verificacao_geral = True
+                            continue
                         else:
+                            break
+
+                    if verificacao_geral == True:
+                        email = input('Digite o email do contato: ').lower().strip()
+                        cont_arroba = email.count('@')
+
+                        pontos_seguidos = 0
+                        for i in range(len(email)+1):
+                            if i == len(email)-1:
+                                break
+                            if email[i] == email[i+1] and email[i] == '.':
+                                pontos_seguidos += 1
+                        verificacao = False
+                        if '@' in email:
+                            posicao_arroba = email.index('@')
+                            if cont_arroba == 1 and email[0] != '@' and email[0] != '.' and email[-1] != '@' and email[-1] != '.' and pontos_seguidos == 0 and email[posicao_arroba-1] != '.' and email[posicao_arroba+1] != '.':
+                                if len(email[posicao_arroba:]) >= 4:
+                                    sub_email = email[posicao_arroba:]
+                                    if '.' in sub_email:
+                                        posicao_ponto = sub_email.index('.')
+                                        if '.' not in sub_email[-2:]:
+                                            adicionar_contato(agenda, usuario, nome, numero, email)
+                                            verificacao = True
+                                        
+                        if verificacao == False:
                             print('Email inválido!')
-                    else:
-                        print('email inválido!')
+                    
+                if verificacao_geral == False:
+
+                    print('Erro! O número tem que seguir esse padrão -> 99999-9999')
+
             else:
-
-                print('Erro! O número tem que seguir esse padrão -> 99999-9999')
-
+                print('O usuário precisa começar com o "@"!')
         else:
-            print('O usuário precisa começar com o "@"!')
+            print(f'Usuário "{usuario}" já está adicionado!')
 
 
     elif opcao == '2':
