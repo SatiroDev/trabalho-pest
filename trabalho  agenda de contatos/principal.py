@@ -144,9 +144,13 @@ while True:
 
                 if verificacao_geral == True:
                     email = input('Digite o email do contato: ').lower()
-
-                    if len(email) > 10 and email[-10:] == '@gmail.com' or email[-12:] == '@outlook.com':
-                        adicionar_contato(agenda, usuario, nome, numero, email)
+                    cont_arroba = email.count('@')
+                    if len(email) == 0:
+                        print('Email não pode ficar em branco!')
+                    if cont_arroba > 1:
+                        print('Email só pode ter um "@"!')
+                    if cont_arroba == 0:
+                        print('Email tem que ter pelo menos um "@"!')
 
                     else:
                         print('Erro! Email não aceito!')
@@ -193,11 +197,10 @@ while True:
                     if len(novo_numero) == 10:
 
                         for num in novo_numero:
-                            contagem += 1
 
                             if num in '0123156789':
-
-                                if contagem == 10:
+                                contagem += 1
+                                if contagem == 9:
                                     verificacao_geral = True
                                 continue
 
