@@ -130,7 +130,7 @@ while True:
 
                 for num in numero:
                     if numero[5] == '-':
-                        if num in '0123156789':
+                        if num in '0123456789':
                             contagem += 1
                             if contagem == 9:
                                 verificacao_geral = True
@@ -143,18 +143,31 @@ while True:
                         break
 
                 if verificacao_geral == True:
-                    email = input('Digite o email do contato: ').lower()
+                    email = input('Digite o email do contato: ').lower().strip()
                     cont_arroba = email.count('@')
-                    if len(email) == 0:
-                        print('Email não pode ficar em branco!')
-                    if cont_arroba > 1:
-                        print('Email só pode ter um "@"!')
-                    if cont_arroba == 0:
-                        print('Email tem que ter pelo menos um "@"!')
 
+                    pontos_seguidos = 0
+                    for i in range(len(email)+1):
+                        if i == len(email)-1:
+                            break
+                        if email[i] == email[i+1] and email[i] == '.':
+                            pontos_seguidos += 1
+                    posicao_arroba = email.index('@')
+                    if cont_arroba == 1 and email[0] != '@' and email[0] != '.' and email[-1] != '@' and email[-1] != '.' and pontos_seguidos == 0 and email[posicao_arroba-1] != '1' and email[posicao_arroba+1] != '.':
+                        if len(email[posicao_arroba:]) >= 4:
+                            sub_email = email[posicao_arroba:]
+                            if '.' in sub_email:
+                                posicao_ponto = sub_email.index('.')
+                                if '.' not in sub_email[-2:]:
+                                    pass
+                                else:
+                                    print('Email inválido!')
+                            else:
+                                print('Email inválido!')
+                        else:
+                            print('Email inválido!')
                     else:
-                        print('Erro! Email não aceito!')
-
+                        print('email inválido!')
             else:
 
                 print('Erro! O número tem que seguir esse padrão -> 99999-9999')
