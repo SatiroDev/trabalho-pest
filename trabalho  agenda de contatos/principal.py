@@ -156,16 +156,23 @@ while True:
                                     break
                                 if email[i] == email[i+1] and email[i] == '.': # se uma string em uma pocição for igual ao do lado, e a string verificada for um ponto
                                     pontos_seguidos += 1 
-                                if 
                             
                             posicao_arroba = email.index('@') # posição de onde está o '@'
-                            if email[0] != '@' and email[0] != '.' and email[-1] != '@' and email[-1] != '.' and pontos_seguidos == 0 and email[posicao_arroba-1] != '.' and email[posicao_arroba+1] != '.': # se não começar com "@" nem "." e não terminar com "@" nem "." e não tiver pontos seguidos e antes e dps do arroba não for um "."
-                                if len(email[posicao_arroba:]) >= 4: # se o tamanho da 'sub_string' começando de onde está o '@' for maior que 4
-                                    sub_email = email[posicao_arroba:]
-                                    if '.' in sub_email: # se tiver '.' no "sub_email"
-                                        if '.' not in sub_email[-2:]: # se um '.' não estiver nem na penúltima e nem última posição 
-                                            adicionar_contato(agenda, usuario, nome, numero, email)
-                                            verificacao = True
+                            sub_email_antes_do_arroba = email[:posicao_arroba]
+                            verificacao_email = True
+                            if len(sub_email_antes_do_arroba) >= 3:
+                                if sub_email_antes_do_arroba[-2] == '.' and sub_email_antes_do_arroba[-1] == '-' or sub_email_antes_do_arroba[-1] == '_':
+                                    verificacao_email = False
+                            email_invertido = email[::-1]
+                            posicao_ponto = email_invertido.index('.')
+                            if email_invertido[posicao_ponto+1] != '-':
+                                if verificacao_email == True and email[0] != '@' and email[0] != '.' and email[-1] != '@' and email[-1] != '.' and pontos_seguidos == 0 and email[posicao_arroba-1] != '.' and email[posicao_arroba+1] != '.' and email[posicao_arroba+1] != '-' and '_' not in email[posicao_arroba:]: # se não começar com "@" nem "." e não terminar com "@" nem "." e não tiver pontos seguidos, e antes e dps do arroba não for um ".", e se depois do "@" não começa com '-' e se não tem "_" depois do "@"
+                                    if len(email[posicao_arroba:]) >= 4: # se o tamanho da 'sub_string' começando de onde está o '@' for maior que 4
+                                        sub_email = email[posicao_arroba:]
+                                        if '.' in sub_email: # se tiver '.' no "sub_email"
+                                            if '.' not in sub_email[-2:]: # se um '.' não estiver nem na penúltima e nem última posição 
+                                                adicionar_contato(agenda, usuario, nome, numero, email)
+                                                verificacao = True
                                         
                         if verificacao == False:
                             print('Email inválido!')
