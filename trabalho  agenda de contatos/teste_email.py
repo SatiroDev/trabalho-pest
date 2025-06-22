@@ -52,7 +52,7 @@ emails_invalidos = [
     "jose @gmail.com",
     "jose@ gmail.com",
     "@gmail.com",
-
+    "jose@",
     "",
     " ",
 ]
@@ -84,7 +84,8 @@ for email in emails_invalidos:
             if sub_email_antes_do_arroba[-2] == '.' and sub_email_antes_do_arroba[-1] == '-' or sub_email_antes_do_arroba[-1] == '_' and sub_email_antes_do_arroba[-2] == '.':
                 verificacao_email = False
         email_invertido = email[::-1]
-        posicao_ponto = email_invertido.index('.')
+        if '.' in email_invertido:
+            posicao_ponto = email_invertido.index('.')
         if email_invertido[posicao_ponto+1] != '-' and email_invertido[posicao_ponto-1] != '-':
             if verificacao_email == True and email[0] != '@' and email[0] != '.' and email[-1] != '@' and email[-1] != '.' and pontos_seguidos == 0 and email[posicao_arroba-1] != '.' and email[posicao_arroba+1] != '.' and email[posicao_arroba+1] != '-' and email[posicao_arroba-1] != '-'and '_' not in email[posicao_arroba:]: # se não começar com "@" nem "." e não terminar com "@" nem "." e não tiver pontos seguidos e antes e dps do arroba não for um "." e se não tem "_" depois do "@"
                 if email[0] != "-" and email[0] != "_" and email[-1] != "-" and email[-1] != "_":
