@@ -13,5 +13,10 @@
         "Teste Função Validar Email",
         "99999-9999",
         "validar_email_teste@gmail.test.com.br"
+    ],
+    "@joselima": [
+        "Lima José",
+        "98715-9845",
+        "limajose@outlook.com.br"
     ]
 }
