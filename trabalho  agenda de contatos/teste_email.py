@@ -57,7 +57,52 @@ emails_invalidos = [
     " ",
 ]
 
-for email in emails_invalidos:
+
+emails_validos = [
+    'validar_email@gmail.com',
+    # Básicos e comuns
+    "jose 34@gmail.com",
+    "joao@gmail.com",
+    "ana.silva@outlook.com.br",
+    "maria_2024@yahoo.com",
+    "carlos-dev@empresa.org",
+    "lucas123@host.net",
+
+    # Com hífens e underlines no nome de usuário
+    "user_test-01@dominio.com",
+    "ana-bia_1988@meusite.com.br",
+    "lucas.dev_pro@startup.dev",
+
+    # Subdomínios
+    "contato@sub.dominio.com",
+    "user@suporte.empresa.tech",
+    "admin@server1.host123.com",
+
+    # TLDs variados e modernos
+    "nome@loja.online",
+    "dev@site.tech",
+    "suporte@instituto.edu.br",
+    "info@empresa.ai",
+    "hello@site.dev",
+
+    # Domínios com números no meio ou no fim
+    "jose@host123.com",
+    "ana@empresa2025.com",
+    "time@projeto2.org",
+    "exemplo@v2.portal.gov.br",
+
+    # Endereços curtos mas válidos
+    "a@b.co",
+    "x@y.io",
+    "z9@d4.dev",
+
+    # Combinando vários estilos
+    "lucas_oliveira-test@sub.projeto-2024.org",
+    "user.name_01@infra.ti.gov.br",
+]
+
+
+for email in emails_validos:
     email = email.lower().strip() 
     
     cont_arroba = email.count('@') #conta quantos '@' o usuário escreveu na variável 'email'
@@ -86,7 +131,12 @@ for email in emails_invalidos:
         email_invertido = email[::-1]
         if '.' in email_invertido:
             posicao_ponto = email_invertido.index('.')
-        if email_invertido[posicao_ponto+1] != '-' and email_invertido[posicao_ponto-1] != '-':
+            verificacao_numero = True
+            for i in email_invertido[:posicao_ponto]: # verificar se tem número na extensão
+                if i in '1234567890':
+                    verificacao_numero = False
+                    break
+        if email_invertido[posicao_ponto+1] != '-' and email_invertido[posicao_ponto-1] != '-' and verificacao_numero == True:
             if verificacao_email == True and email[0] != '@' and email[0] != '.' and email[-1] != '@' and email[-1] != '.' and pontos_seguidos == 0 and email[posicao_arroba-1] != '.' and email[posicao_arroba+1] != '.' and email[posicao_arroba+1] != '-' and email[posicao_arroba-1] != '-'and '_' not in email[posicao_arroba:]: # se não começar com "@" nem "." e não terminar com "@" nem "." e não tiver pontos seguidos e antes e dps do arroba não for um "." e se não tem "_" depois do "@"
                 if email[0] != "-" and email[0] != "_" and email[-1] != "-" and email[-1] != "_":
                     if len(email[posicao_arroba:]) >= 4: # se o tamanho da 'sub_string' começando de onde está o '@' for maior que 4
