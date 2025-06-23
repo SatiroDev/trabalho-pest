@@ -27,6 +27,31 @@ def menu_edicao():
     print('-=-' * 15)
     return opcao
 
+def validar_nome(nome):
+    verificacao_nome = False
+    for i in range(len(nome)):
+        if nome[i] in '0123456789':
+            break
+        else:
+            if i == len(nome)-1:
+                verificacao_nome = True
+    return verificacao_nome
+
+def validar_numero(numero):
+    contagem = 0
+    verificacao_numero = False
+    if len(numero) == 10:
+        for num in numero:
+            if numero[5] == '-':
+                if num in '0123456789':
+                    contagem += 1
+                    if contagem == 9:
+                        verificacao_numero = True
+                continue
+            else:
+                break
+    return verificacao_numero
+
 def validar_email(email):
     cont_arroba = email.count('@') #conta quantos '@' o usuário escreveu na variável 'email'
     verificacao = False
@@ -69,21 +94,6 @@ def validar_email(email):
                                 verificacao = True
                                                             
     return verificacao # retorna True ou False
-
-def validar_numero(numero):
-    contagem = 0
-    verificacao_numero = False
-    if len(numero) == 10:
-        for num in numero:
-            if numero[5] == '-':
-                if num in '0123456789':
-                    contagem += 1
-                    if contagem == 9:
-                        verificacao_numero = True
-                continue
-            else:
-                break
-    return verificacao_numero
 
 def mostrar_contatos():
     print()
@@ -183,20 +193,23 @@ while True:
 
             if usuario[0] == '@':
                 nome = input('Digite o nome do contato: ').title().strip()
-                numero = input('Digite o número: (ex: 99999-9999) ').strip()
-                if validar_numero(numero):
-                    verificacao_geral = True
+                if validar_nome(nome):
+                    numero = input('Digite o número: (ex: 99999-9999) ').strip()
+                    if validar_numero(numero):
+                        verificacao_geral = True
 
-                if verificacao_geral:
-                    email = input('Digite o email do contato: ').lower().strip()
-                    print(validar_email(email))
-                    if validar_email(email):
-                        adicionar_contato(agenda, usuario, nome, numero, email)
+                    if verificacao_geral:
+                        email = input('Digite o email do contato: ').lower().strip()
+                        print(validar_email(email))
+                        if validar_email(email):
+                            adicionar_contato(agenda, usuario, nome, numero, email)
 
+                        else:
+                            print('Email inválido!')
                     else:
-                        print('Email inválido!')
+                        print('Erro! O número tem que seguir esse padrão -> 99999-9999')
                 else:
-                    print('Erro! O número tem que seguir esse padrão -> 99999-9999')
+                    print('Nome não pode haver números!')
 
             else:
                 print('O usuário precisa começar com o "@"!')
