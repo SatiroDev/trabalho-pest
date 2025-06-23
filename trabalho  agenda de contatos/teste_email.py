@@ -1,4 +1,4 @@
-pribidos_no_email = """() <> [] ; : , \ / " ' ` ~ = + * & % $ # ! { } | ? ^"""
+pribidos_no_email = """() <> [] ; : , \ / " ' ` ~ = + * & % $ # ! { } | ? ^ ç á ã â à é ê è ó ò õ ô í ì î ú ù û """
 
 emails_invalidos = [
 
@@ -59,7 +59,8 @@ emails_invalidos = [
 
 
 emails_validos = [
-    'validar_email@gmail.com',
+    "função@gmail.com",
+    "validar_email@gmail.com",
     # Básicos e comuns
     "jose 34@gmail.com",
     "joao@gmail.com",
