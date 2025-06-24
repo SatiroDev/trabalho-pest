@@ -3,7 +3,6 @@ pribidos_no_email = """() <> [] ; : , \ / " ' ` ~ = + * & % $ # ! { } | ? ^ ç �
 emails_invalidos = [
 
     # 1. Falta de @ ou múltiplos @
-    "josegmail.com",
     "jose@@gmail.com",
     "jose@gmail@com",
 
@@ -59,7 +58,6 @@ emails_invalidos = [
 
 
 emails_validos = [
-    "função@gmail.com",
     "validar_email@gmail.com",
     # Básicos e comuns
     "jose 34@gmail.com",
@@ -103,8 +101,8 @@ emails_validos = [
 ]
 
 
-for email in emails_validos:
-    email = email.lower().strip() 
+while True:
+    email = input('Email: ').lower().strip() 
     
     cont_arroba = email.count('@') #conta quantos '@' o usuário escreveu na variável 'email'
     verificacao = False
