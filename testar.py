@@ -3,14 +3,18 @@ def carregar_agenda():
     with open ('agenda.json', 'r') as f:
         return json.load (f)
 def menu():
-    print('--- AGENDA DE CONTATOS ---')
-    print('1. Adicionar contato')
-    print('2. Buscar contato')
-    print('3. Editar contato')
-    print('4. Remover contato')
-    print('5. Sair')
-    opção = input('Opção: ')
-    return opção
+    print('+' + '-' * 38 + '+')
+    print('|{:^38}|'.format('AGENDA DE CONTATOS'))
+    print('+' + '-' * 38 + '+')
+    print('| {:<2} - {:<30}  |'.format('1', 'Adicionar contato'))
+    print('| {:<2} - {:<30}  |'.format('2', 'Buscar contato'))
+    print('| {:<2} - {:<30}  |'.format('3', 'Editar contato'))
+    print('| {:<2} - {:<30}  |'.format('4', 'Remover contato'))
+    print('| {:<2} - {:<30}  |'.format('5', 'Sair'))
+    print('+' + '-' * 38 + '+')
+    opcao = input('>> Escolha uma opção: ')
+    print()
+    return opcao
 def adicionar_contato(agenda, usuario, nome, telefone, email):
     agenda[usuario] = [nome, telefone, email]
     salvar_agenda(agenda) 
@@ -22,9 +26,12 @@ def buscar_contato(agenda, usuario):
     print(f'Telefone: {agenda[usuario][1]}')
     print(f'Email: {agenda[usuario][2]}')
 def editar_agenda(agenda , usuario , campo , novo_valor):
+    usuarios_adicionados()
     if campo == '1':
-        agenda[usuario][0] = novo_valor
-        print('Nome modificado com sucesso!')
+        nome = novo_valor
+        if verificacao_nome(nome):
+            agenda[usuario][0] = novo_valor
+            print('Nome modificado com sucesso!')
     elif campo == '2':
         telefone = novo_valor
         if verificacao_telefone(telefone):
@@ -39,7 +46,6 @@ def editar_agenda(agenda , usuario , campo , novo_valor):
             print('Email modificado com sucesso!')
         else:
             print('Email inválido')
-
 def menu_editar():
     titulo = " EDITAR "
     largura = len(titulo) + 4
@@ -51,10 +57,10 @@ def menu_editar():
     print('2. Alterar telefone')
     print('3. Alterar email')
     print('4. sair')
-    campo = input('opção: ')
+    campo = input('>> opção: ')
     return campo
 def verificacao_email(email):
-        proibidos_no_email = """() <> [] ; : , \ / " ' ` ´ ~ = + * & % $ # ! { } | ? ^ ç á ã â à é ê è ó ò õ ô í ì î ú ù û § ¬ ¢ £ ° ª"""
+        proibidos_no_email = """() <> [] ; : , / " ' ` ´ ~ = + * & % $ # ! { } | ? ^ ç á ã â à é ê è ó ò õ ô í ì î ú ù û § ¬ ¢ £ ° ª \ """
         cont_arroba = email.count('@') #conta quantos '@' o usuário escreveu na variável 'email'
         verificacao = False
         verificacao_proibidos = False
@@ -120,11 +126,29 @@ def remover_contato(usuario):
     del agenda[usuario]
     salvar_agenda(agenda)
     print(f'Usuario "{usuario}"removido com sucesso!')
+def usuarios_adicionados():
+    lista_usuario = []
+    maior = 'a'
+    # Descobrindo o nome de usuário com maior comprimento
+    for usuario in agenda.keys():
+        if len(usuario) > len(maior):
+            maior = usuario 
+        lista_usuario.append(usuario)
+    largura = len(maior) + 6  # margem extra pros espaços
+    # Título
+    print('+' + '-' * largura + '+')
+    print('|{:^{}}|'.format('USUÁRIOS ADICIONADOS', largura ))
+    print('+' + '-' * largura + '+')
+    # Listagem dos usuários
+    for nome in lista_usuario:
+        print('| {:<{}} |'.format(nome, largura - 2))
+
+    print('+' + '-' * largura + '+')
 agenda = carregar_agenda()
 while True:
     escolha = menu()
     if escolha == '1':
-        usuario = input('Qual o nome do usuário (Utilize @ no começo. Ex: @gaguin)? ').lower()
+        usuario = input('>> Qual o nome do usuário (Utilize @ no começo. Ex: @gaguin)? ').lower()
         bolean = False
         if len(usuario) == 0:
             print('Não deixe em branco')
@@ -132,11 +156,11 @@ while True:
             if usuario in agenda:
                 print('Usuário existente.')
             else:
-                nome = input('Digite o nome do contato: ').title().strip()
+                nome = input('>> Digite o nome do contato: ').title().strip()
                 if verificacao_nome(nome):
-                    telefone = input('Qual o seu número de Telefone (Lembre-se de colocar o hífen. ex: xxxxx-xxxx)? ').strip()
+                    telefone = input('>> Qual o seu número de Telefone (Lembre-se de colocar o hífen. ex: xxxxx-xxxx)? ').strip()
                     if verificacao_telefone(telefone):
-                        email = input('Email: ').lower().strip() 
+                        email = input('>> Email: ').lower().strip() 
                         if verificacao_email(email):
                             adicionar_contato(agenda, usuario, nome, telefone, email)
                             print(f'Contado adiconado!')
@@ -152,30 +176,33 @@ while True:
         if len(agenda) == 0:
             print('Agenda vazia, adicione antes de buscar contatos')
         else:
-            usuario = input('Qual o nome do usuario? ').lower()
+            usuarios_adicionados()
+            usuario = input('>> Qual o nome do usuario? ').lower()
             if usuario in agenda.keys():
                 buscar_contato(agenda, usuario)
             else:
-                print(f'Usuário: {usuario} não encontrado!')
-                
-                
+                print(f'Usuário: {usuario} não encontrado!')              
     elif escolha == '3':
         if len(agenda) == 0:
             print('Agenda vazia, adicione antes de buscar contatos')
         else:
-            for usuario in agenda.keys():
-                titulo = usuario
-                largura = len(titulo) + 4
-                print('+' + '-' * (largura - 2) + '+')
-                print(f'| {titulo} |')
-                print('+' + '-' * (largura - 2) + '+')
-            usuario = input('Qual o nome do usuario? ').lower()
+            usuarios_adicionados()
+            usuario = input('>> Qual o nome do usuario? ').lower()
             if usuario in agenda.keys():
+                print(f'== Detalhes do Contato ==')
+                print()
+                print('> Nome')
+                print('  {}'.format(agenda[usuario][0]))
+                print('> Telefone')
+                print('  {}'.format(agenda[usuario][1]))
+                print('> Email')
+                print('  {}'.format(agenda[usuario][2]))
+                print()
                 campo = menu_editar()
                 if campo == '1' or campo == '2' or campo == '3':
-                    novo_valor = input('Qual o novo valor que deseja adicionar? ').strip().title()
+                    novo_valor = input('>> Qual o novo valor que deseja adicionar? ').strip().title()
                     editar_agenda(agenda, usuario, campo, novo_valor)
-                elif campo == 4:
+                elif campo == '4':
                     print('Até mais!')
                 else:
                     print('Opção incorreta!')
@@ -185,18 +212,15 @@ while True:
         if len(agenda) == 0:
             print('Agenda vazia, adicione antes de buscar contatos')
         else:
-            for usuario in agenda.keys():
-                    titulo = usuario
-                    largura = len(titulo) + 4
-                    print('+' + '-' * (largura - 2) + '+')
-                    print(f'| {titulo} |')
-                    print('+' + '-' * (largura - 2) + '+')
-            usuario_remover = input('Qual usuário você deseja remover? ')
+            usuarios_adicionados()
+            usuario_remover = input('>> Qual usuário você deseja remover? ')
             if usuario_remover in agenda.keys():
                 remover_contato(usuario_remover)
             else:
                 print(f'Usuário "{usuario_remover}"não encontrado!')
-    # elif escolha == '5':
-    #     apagar_conjunto()
+    elif escolha == '5':
+        print('Programa encerrando em 3, 2, 1...')
+        print('programa encerrado!')
+        break
     else:
         print('Opção inválida!')
