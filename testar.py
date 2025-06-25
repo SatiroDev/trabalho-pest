@@ -51,15 +51,16 @@ def editar_agenda(agenda , usuario , campo , novo_valor):
             print('Email inválido')
 def menu_editar():
     titulo = " EDITAR "
-    largura = len(titulo) + 4
+    largura = 36
     print('+' + '-' * (largura - 2) + '+')
-    print(f'| {titulo} |')
+    print(f'| {titulo:^32} |')
     print('+' + '-' * (largura - 2) + '+')
-    print('Qual campo você deseja editar? ')
-    print('1. Alterar nome')
-    print('2. Alterar telefone')
-    print('3. Alterar email')
-    print('4. sair')
+    print(f'| {"Qual campo você deseja editar?" :<32} |')
+    print(f'| {"1. Alterar nome" :<32} |')
+    print(f'| {"2. Alterar telefone" :<32} |')
+    print(f'| {"3. Alterar email" :<32} |')
+    print(f'| {"4. sair" :<32} |')
+    print('+' + '-' * (largura - 2) + '+')
     campo = input('>> opção: ')
     return campo
 def verificacao_email(email):
