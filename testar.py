@@ -4,13 +4,13 @@ def carregar_agenda():
         return json.load (f)
 def menu():
     print('+' + '-' * 38 + '+')
-    print('|{:^38}|'.format('AGENDA DE CONTATOS'))
+    print(f'|{"AGENDA DE CONTATOS":^38}|')
     print('+' + '-' * 38 + '+')
-    print('| {:<2} - {:<30}  |'.format('1', 'Adicionar contato'))
-    print('| {:<2} - {:<30}  |'.format('2', 'Buscar contato'))
-    print('| {:<2} - {:<30}  |'.format('3', 'Editar contato'))
-    print('| {:<2} - {:<30}  |'.format('4', 'Remover contato'))
-    print('| {:<2} - {:<30}  |'.format('5', 'Sair'))
+    print(f'| {"1":<2} - {"Adicionar contato":<30}  |')
+    print(f'| {"2":<2} - {"Buscar contato":<30}  |')
+    print(f'| {"3":<2} - {"Editar contato":<30}  |')
+    print(f'| {"4":<2} - {"Remover contato":<30}  |')
+    print(f'| {"5":<2} - {"Sair":<30}  |')
     print('+' + '-' * 38 + '+')
     opcao = input('>> Escolha uma opção: ')
     print()
@@ -22,9 +22,12 @@ def salvar_agenda(agenda):
     with open ('agenda.json', 'w') as f:
         return json.dump(agenda, f)    
 def buscar_contato(agenda, usuario):
+    print()
+    print(f'== Detalhes do Contato ==')
     print(f'Nome: {agenda[usuario][0]}')
     print(f'Telefone: {agenda[usuario][1]}')
     print(f'Email: {agenda[usuario][2]}')
+    print()
 def editar_agenda(agenda , usuario , campo , novo_valor):
     usuarios_adicionados()
     if campo == '1':
@@ -125,7 +128,7 @@ def verificacao_telefone(telefone):
 def remover_contato(usuario):
     del agenda[usuario]
     salvar_agenda(agenda)
-    print(f'Usuario "{usuario}"removido com sucesso!')
+    print(f'Usuario "{usuario}" removido com sucesso!')
 def usuarios_adicionados():
     lista_usuario = []
     maior = 'a'
@@ -134,14 +137,18 @@ def usuarios_adicionados():
         if len(usuario) > len(maior):
             maior = usuario 
         lista_usuario.append(usuario)
-    largura = len(maior) + 6  # margem extra pros espaços
+    mensagem = "USUÁRIOS ADICIONADOS"
+    if len(mensagem) > len(maior):
+        maior = mensagem
+    
+    largura = len(maior) + 6 # margem extra pros espaços
     # Título
     print('+' + '-' * largura + '+')
-    print('|{:^{}}|'.format('USUÁRIOS ADICIONADOS', largura ))
+    print(f'|{mensagem:^{largura}}|')
     print('+' + '-' * largura + '+')
     # Listagem dos usuários
     for nome in lista_usuario:
-        print('| {:<{}} |'.format(nome, largura - 2))
+        print(f'| {nome:<{largura-2}} |')
 
     print('+' + '-' * largura + '+')
 agenda = carregar_agenda()
@@ -189,15 +196,7 @@ while True:
             usuarios_adicionados()
             usuario = input('>> Qual o nome do usuario? ').lower()
             if usuario in agenda.keys():
-                print(f'== Detalhes do Contato ==')
-                print()
-                print('> Nome')
-                print('  {}'.format(agenda[usuario][0]))
-                print('> Telefone')
-                print('  {}'.format(agenda[usuario][1]))
-                print('> Email')
-                print('  {}'.format(agenda[usuario][2]))
-                print()
+                buscar_contato(agenda, usuario)
                 campo = menu_editar()
                 if campo == '1' or campo == '2' or campo == '3':
                     novo_valor = input('>> Qual o novo valor que deseja adicionar? ').strip().title()
