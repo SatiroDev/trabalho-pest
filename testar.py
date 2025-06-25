@@ -60,7 +60,7 @@ def menu_editar():
     campo = input('>> opção: ')
     return campo
 def verificacao_email(email):
-        proibidos_no_email = """() <> [] ; : , / " ' ` ´ ~ = + * & % $ # ! { } | ? ^ ç á ã â à é ê è ó ò õ ô í ì î ú ù û § ¬ ¢ £ ° ª \ """
+        proibidos_no_email = """()<>[];:,/"'`´~=+*&%$#!{ }|?^çáãâàéêèóòõôíìîúùû§¬¢£°ª\ """
         cont_arroba = email.count('@') #conta quantos '@' o usuário escreveu na variável 'email'
         verificacao = False
         verificacao_proibidos = False
@@ -92,8 +92,8 @@ def verificacao_email(email):
                         verificacao_numero = False
                         break
             if email_invertido[posicao_ponto+1] != '-' and email_invertido[posicao_ponto-1] != '-' and verificacao_numero == True:
-                if verificacao_email == True and email[0] != '@' and email[0] != '.' and email[-1] != '@' and email[-1] != '.' and pontos_seguidos == 0 and email[posicao_arroba-1] != '.' and email[posicao_arroba+1] != '.' and email[posicao_arroba+1] != '-' and email[posicao_arroba-1] != '-'and '' not in email[posicao_arroba:]: # se não começar com "@" nem "." e não terminar com "@" nem "." e não tiver pontos seguidos e antes e dps do arroba não for um "." e se não tem "" depois do "@"
-                    if email[0] != "-" and email[0] != "" and email[-1] != "-" and email[-1] != "":
+                if verificacao_email == True and email[0] != '@' and email[0] != '.' and email[-1] != '@' and email[-1] != '.' and pontos_seguidos == 0 and email[posicao_arroba-1] != '.' and email[posicao_arroba+1] != '.' and email[posicao_arroba+1] != '-' and email[posicao_arroba-1] != '-'and '_' not in email[posicao_arroba:]: # se não começar com "@" nem "." e não terminar com "@" nem "." e não tiver pontos seguidos e antes e dps do arroba não for um "." e se não tem "" depois do "@"
+                    if email[0] != "-" and email[0] != "_" and email[-1] != "-" and email[-1] != "_":
                         if len(email[posicao_arroba:]) >= 4: # se o tamanho da 'sub_string' começando de onde está o '@' for maior que 4
                             sub_email = email[posicao_arroba:]
                             if '.' in sub_email: # se tiver '.' no "sub_email"
