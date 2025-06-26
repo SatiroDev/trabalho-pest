@@ -49,6 +49,7 @@ def editar_agenda(agenda , usuario , campo , novo_valor):
             print('Email modificado com sucesso!')
         else:
             print('Email inválido')
+
 def menu_editar():
     titulo = " EDITAR "
     largura = 36
@@ -63,6 +64,7 @@ def menu_editar():
     print('+' + '-' * (largura - 2) + '+')
     campo = input('>> opção: ')
     return campo
+
 def verificacao_email(email):
         proibidos_no_email = """()<>[];:,/"'`´~=+*&%$#!{ }|?^çáãâàéêèóòõôíìîúùû§¬¢£°ª\ """
         cont_arroba = email.count('@') #conta quantos '@' o usuário escreveu na variável 'email'
