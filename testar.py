@@ -158,7 +158,7 @@ agenda = carregar_agenda()
 while True:
     escolha = menu()
     if escolha == '1':
-        usuario = input('>> Qual o nome do usuário (Utilize @ no começo. Ex: @gaguin)? ').lower()
+        usuario = input('>> Qual o nome do usuário (Utilize @ no começo. Ex: @gaguin)? ').lower().strip()
         bolean = False
         if len(usuario) == 0:
             print('Não deixe em branco')
