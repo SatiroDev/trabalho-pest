@@ -1,4 +1,4 @@
-pribidos_no_email = """() <> [] ; : , \ / " ' ` ~ = + * & % $ # ! { } | ? ^ ç á ã â à é ê è ó ò õ ô í ì î ú ù û """
+proibidos_no_email = """() <> [] ; : , \ / " ' `  ~ = + * & % $ # ! { } | ? ^ ç á ã â à é ê è ó ò õ ô í ì î ú ù û """
 
 emails_invalidos = [
 
@@ -108,7 +108,7 @@ while True:
     verificacao = False
     verificacao_proibidos = False
     print(email)
-    for caracter in pribidos_no_email:
+    for caracter in proibidos_no_email:
         if caracter in email: # se um caractere proibido estiver no email que o usuário digitou
             verificacao_proibidos = True
             break
